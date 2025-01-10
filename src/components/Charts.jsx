@@ -1,11 +1,31 @@
 import React from 'react'
-import { Line, Bar } from 'react-chartjs-2'
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend } from 'chart.js'
+import { Line, Bar } from 'react-chartjs-2' // Import Bar
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement, // Import BarElement
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js'
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend)
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement, // Register BarElement
+  Title,
+  Tooltip,
+  Legend
+)
 
 const options = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
@@ -14,46 +34,51 @@ const options = {
   scales: {
     x: {
       grid: {
-        display: false,
+        color: 'rgba(255, 255, 255, 0.1)',
+      },
+      ticks: {
+        color: '#fff',
       },
     },
     y: {
       grid: {
         color: 'rgba(255, 255, 255, 0.1)',
       },
+      ticks: {
+        color: '#fff',
+      },
     },
   },
 }
 
-export const LineChart = () => {
-  const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+export const LineChart = ({ data }) => {
+  const chartData = {
+    labels: data.map(item => item.name),
     datasets: [
       {
-        data: [65, 59, 80, 81, 56, 55],
-        borderColor: 'rgb(147, 51, 234)',
+        data: data.map(item => item.total),
+        borderColor: '#9333ea',
         backgroundColor: 'rgba(147, 51, 234, 0.5)',
         tension: 0.4,
       },
     ],
   }
 
-  return <Line options={options} data={data} />
+  return <Line options={options} data={chartData} />
 }
 
-export const BarChart = () => {
-  const data = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+export const BarChart = ({ data }) => {
+  const chartData = {
+    labels: data.map(item => item.name),
     datasets: [
       {
-        data: [12, 19, 3, 5, 2],
+        data: data.map(item => item.total),
         backgroundColor: 'rgba(147, 51, 234, 0.5)',
-        borderColor: 'rgb(147, 51, 234)',
+        borderColor: '#9333ea',
         borderWidth: 1,
       },
     ],
   }
 
-  return <Bar options={options} data={data} />
+  return <Bar options={options} data={chartData} />
 }
-

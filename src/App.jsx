@@ -13,6 +13,10 @@ import Pricing from './components/Pricing'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import FeatureShowcase from './components/FeatureShowCase'
+import { BuyerAnalysis } from './components/BuyerAnalysis'
+import { TaskAutomation } from './components/TaskAutomation'
+
+
 
 const App = () => {
   return (
@@ -23,6 +27,8 @@ const App = () => {
           <Hero />
           <FeatureShowcase/>
           <Partners />
+          <BuyerAnalysis/>
+          <TaskAutomation/>
           <Features />
           <Analytics />
           <Process />
