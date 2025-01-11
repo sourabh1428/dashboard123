@@ -29,13 +29,15 @@ const CustomerJourney = () => {
 
   return (
     <motion.div
-      className="p-8 bg-gray-100 min-h-screen"
+      className="p-8  min-h-screen bg-gradient-to-br from-gray-900 to-black text-white"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+     
     >
-      <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Customer Journey</h1>
-      <motion.div className="space-y-12" variants={itemVariants}>
+      <h1 className="text-4xl font-bold mb-8 text-center text-gray-800 ">Customer Journey</h1>
+      <motion.div className="space-y-12 "  variants={itemVariants}>
+        <div ></>
         <OrderConfirmation />
         <InvoiceGeneration />
         <CustomerDashboard />

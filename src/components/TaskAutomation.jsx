@@ -72,7 +72,7 @@ const TaskItem = ({ task, index }) => (
 
 export function TaskAutomation() {
   return (
-    <section className="py-20 px-6 bg-gray-900 text-white">
+    <section className="py-20 px-6 bg-gradient-to-br from-gray-900 to-black text-white text-white">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}

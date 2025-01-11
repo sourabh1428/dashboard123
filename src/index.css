@@ -43,8 +43,10 @@ html {
 
 body {
   overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); /* For Firefox */
+  background: linear-gradient(to bottom right, #1a202c, #000000); /* bg-gradient-to-br from-gray-900 to-black */
+  color: #ffffff; /* text-white */
 }
 
 /* Webkit browsers like Chrome, Safari */

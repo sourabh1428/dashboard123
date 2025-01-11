@@ -32,15 +32,15 @@ const FeatureCard = ({ icon: Icon, title, description }) => (
 
 const FeatureShowcase = () => {
   return (
-    <section className="container mx-auto px-4 py-12 md:py-20 lg:py-24">
+    <section className="container mx-auto px-4 py-12 md:py-20 lg:py-24 bg-gradient-to-br from-gray-900 to-black text-white">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="text-center mb-12"
       >
-        <Badge variant="outline" className="mb-4 text-purple-400 border-purple-400">Features</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+        <Badge variant="outline" className="mb-4 text-white-400 border-purple-400">Features</Badge>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-white">
           Unlock Growth with MarketMe
         </h2>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">

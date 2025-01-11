@@ -5,7 +5,7 @@ import { User, Star, Settings } from 'lucide-react';
 const CustomerDashboard = () => {
   return (
     <motion.div
-      className="bg-white p-8 rounded-lg shadow-lg"
+      className="bg-white p-8 rounded-lg shadow-lg  bg-gradient-to-br from-gray-900 to-black text-white"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

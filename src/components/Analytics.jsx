@@ -17,7 +17,7 @@ const Analytics = () => {
   }
 
   return (
-    <section id="analytics" className="container mx-auto px-4 py-12 md:py-20 lg:py-24" ref={ref}>
+    <section id="analytics" className="container mx-auto px-4 py-12 md:py-20 lg:py-24  bg-gradient-to-br from-gray-900 to-black text-white" ref={ref}>
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
