@@ -6,36 +6,40 @@ import { Check } from 'lucide-react'
 const plans = [
   {
     name: 'Basic Plan',
-    price: '19',
+    price: '300',
     features: [
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
+    'Order summaries',
+      'Whatsapp messages for sales',
+      'Download the reports'
     ]
   },
   {
     name: 'Pro Plan',
-    price: '29',
+    price: '900',
     popular: true,
     features: [
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
+      'Order summaries',
+      'Whatsapp messages for sales',
+      'Download the reports',
+      'Send future campaigns using whatsapp',
+      'AI contents',
     ]
   },
   {
     name: 'Enterprise Plan',
-    price: '49',
+    price: '2000',
     features: [
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
-      'This is a feature',
+      'Order summaries',
+      'Whatsapp messages for sales',
+      'Download the reports',
+      'Send future campaigns using whatsapp',
+      'AI contents',
+      'Email messages for sales and marketing',
+      'SMS messages for sales and marketing',
+      'Email newsletters',
+      'Social media integration',
+      'Integration with CRM systems',
+      'Integration with payment gateways',
     ]
   }
 ]
@@ -62,7 +66,7 @@ const Pricing = () => {
           >
             <h3 className="text-xl font-bold mb-4">{plan.name}</h3>
             <div className="mb-6">
-              <span className="text-4xl font-bold">${plan.price}</span>
+              <span className="text-4xl font-bold">Rs: {plan.price}</span>
               <span className="text-gray-400">/mo</span>
             </div>
             <ul className="space-y-4 mb-6">
@@ -74,10 +78,10 @@ const Pricing = () => {
               ))}
             </ul>
             <Button 
-              className={plan.popular ? 'w-full bg-purple-600 hover:bg-purple-700' : 'w-full'} 
+              className={plan.popular ? 'w-full bg-purple-600 hover: bg-purple-700 ':' w-full bg-white-600'} 
               variant={plan.popular ? 'default' : 'outline'}
             >
-              Try for free
+              Try it
             </Button>
           </motion.div>
         ))}

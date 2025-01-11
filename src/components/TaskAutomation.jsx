@@ -6,15 +6,15 @@ import { Plus, MoreHorizontal } from 'lucide-react'
 
 const tasks = [
   {
-    title: "Research Buyer Persona 1",
+    title: "Research Buyer Persona for Product A",
     progress: 75
   },
   {
-    title: "Create Ad Spend Budget for Product 1",
+    title: "Create Marketing Budget for Campaign A",
     progress: 45
   },
   {
-    title: "Write Ad Script for Buyer Persona 1",
+    title: "Write Ad Script for Buyer Persona A",
     progress: 30
   }
 ]
@@ -86,7 +86,7 @@ export function TaskAutomation() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Automate Mundane Tasks With Drag & Drop Platform
+            Automate Your Marketing Tasks with MarketMe
           </motion.h2>
           <motion.p 
             className="text-gray-400 text-lg"
@@ -94,7 +94,7 @@ export function TaskAutomation() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            Lorem ipsum dolor sit amet consectetur. Integer tellus eu scelerisque nunc. Integer ac convallis tempus nibh ac tristique penatibus nulla a.
+            Streamline your marketing campaigns with ease. Manage buyer personas, budget allocation, and ad scripts all in one platform.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -104,7 +104,7 @@ export function TaskAutomation() {
             <Button 
               className="bg-purple-600 hover:bg-purple-700 text-white"
             >
-              Start Now
+              Start Automating Now
               <motion.span
                 animate={{ x: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
@@ -122,7 +122,7 @@ export function TaskAutomation() {
         >
           <Card>
             <div className="flex items-center justify-between p-6 border-b border-gray-800">
-              <h3 className="text-xl font-semibold">Task Automation</h3>
+              <h3 className="text-xl font-semibold">Your Tasks in MarketMe</h3>
               <MoreHorizontal className="h-5 w-5 text-gray-500" />
             </div>
             <div className="p-6 space-y-4">
@@ -145,4 +145,3 @@ export function TaskAutomation() {
     </section>
   )
 }
-

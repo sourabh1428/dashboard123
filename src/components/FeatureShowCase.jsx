@@ -5,12 +5,12 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowUpRight, Zap, Shield, Globe, Cpu, Cloud } from 'lucide-react'
 
 const features = [
-  { icon: Zap, title: 'Lightning Fast', description: 'Optimized for speed and efficiency' },
-  { icon: Shield, title: 'Secure', description: 'Enterprise-grade security measures' },
-  { icon: Globe, title: 'Global Reach', description: 'Operate seamlessly across borders' },
-  { icon: Cpu, title: 'AI-Powered', description: 'Cutting-edge machine learning algorithms' },
-  { icon: Cloud, title: 'Cloud-Native', description: 'Built for modern cloud infrastructures' },
-  { icon: ArrowUpRight, title: 'Scalable', description: 'Grows with your business needs' },
+  { icon: Zap, title: 'Effortless Campaigns', description: 'Create and launch campaigns with ease using MarketMe.' },
+  { icon: Shield, title: 'Secure Data', description: 'Your customer data is safeguarded with enterprise-grade security.' },
+  { icon: Globe, title: 'Reach Everywhere', description: 'Expand your business globally with our powerful tools.' },
+  { icon: Cpu, title: 'AI-Driven Insights', description: 'Harness AI for actionable insights and smarter decisions.' },
+  { icon: Cloud, title: 'Cloud-First Platform', description: 'MarketMe operates seamlessly on the cloud for reliability.' },
+  { icon: ArrowUpRight, title: 'Scale with Ease', description: 'MarketMe grows with your business, no matter the size.' },
 ]
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
@@ -41,10 +41,10 @@ const FeatureShowcase = () => {
       >
         <Badge variant="outline" className="mb-4 text-purple-400 border-purple-400">Features</Badge>
         <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-          Powerful Tools for Modern Businesses
+          Unlock Growth with MarketMe
         </h2>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          Discover how our platform can revolutionize your operations and drive growth.
+          Discover how MarketMe's innovative platform can transform your marketing efforts and drive success.
         </p>
       </motion.div>
       <motion.div 

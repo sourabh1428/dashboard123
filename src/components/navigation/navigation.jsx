@@ -42,17 +42,8 @@ export function Navbar() {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" className="text-gray-300 hover:text-white">
-            Log in
-          </Button>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              Sign up
-            </Button>
-          </motion.div>
+         
+          
         </div>
       </div>
     </motion.nav>

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from "framer-motion"
+import { motion, useAnimation } from "framer-motion"
 import { MoreHorizontal } from 'lucide-react'
 
 const CircularProgress = ({ progress }) => {
@@ -14,9 +14,8 @@ const CircularProgress = ({ progress }) => {
       width="160"
       height="160"
       viewBox="0 0 160 160"
-      initial={{ rotate: -90 }}
-      animate={{ rotate: 270 }}
-      transition={{ duration: 2, ease: "easeInOut" }}
+      animate={{ rotate: 360 }}
+      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
     >
       <circle
         cx="80"
@@ -34,9 +33,11 @@ const CircularProgress = ({ progress }) => {
         stroke="#8B5CF6"
         strokeWidth="12"
         strokeDasharray={circumference}
-        initial={{ strokeDashoffset: circumference }}
-        animate={{ strokeDashoffset }}
-        transition={{ duration: 2, ease: "easeInOut" }}
+        strokeDashoffset={strokeDashoffset}
+        animate={{ 
+          strokeDashoffset: [strokeDashoffset, circumference, strokeDashoffset] 
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
       />
     </motion.svg>
   )
@@ -48,35 +49,39 @@ const Avatar = ({ className }) => (
 
 const Progress = ({ value, className }) => (
   <div className={`h-2 rounded-full ${className}`}>
-    <div
+    <motion.div
       className="h-full bg-purple-600 rounded-full"
-      style={{ width: `${value}%` }}
-    ></div>
+      initial={{ width: 0 }}
+      animate={{ width: [`${value}%`, "100%", `${value}%`] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+    />
   </div>
 )
 
 const BuyerPersona = ({ name, progress }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="flex items-center gap-3"
-  >
+  <div className="flex items-center gap-3">
     <Avatar className="h-8 w-8" />
     <Progress value={progress} className="flex-1 bg-gray-700" />
-  </motion.div>
+  </div>
 )
 
-const Metric = ({ delay }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ delay }}
-    className="flex gap-2 items-center"
-  >
-    <div className="h-2 w-16 bg-purple-600 rounded" />
-    <div className="h-2 w-24 bg-gray-700 rounded" />
-  </motion.div>
-)
+const Metric = () => {
+  const controls = useAnimation()
+
+  React.useEffect(() => {
+    controls.start({
+      x: [0, 20, 0],
+      transition: { duration: 3, repeat: Infinity, ease: "linear" }
+    })
+  }, [controls])
+
+  return (
+    <motion.div className="flex gap-2 items-center" animate={controls}>
+      <div className="h-2 w-16 bg-purple-600 rounded" />
+      <div className="h-2 w-24 bg-gray-700 rounded" />
+    </motion.div>
+  )
+}
 
 const Card = ({ children, className }) => (
   <div className={`rounded-lg overflow-hidden ${className}`}>
@@ -102,7 +107,7 @@ const CardContent = ({ children, className }) => (
   </div>
 )
 
-export  function BuyerAnalysis() {
+export function BuyerAnalysis() {
   return (
     <section className="py-20 px-6 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -113,7 +118,7 @@ export  function BuyerAnalysis() {
         >
           <Card className="bg-gray-800 border border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between border-b border-gray-700">
-              <CardTitle>Buyer Behaviour Analysis</CardTitle>
+              <CardTitle>Buyer Behavior Analysis</CardTitle>
               <MoreHorizontal className="h-5 w-5 text-gray-500" />
             </CardHeader>
             <CardContent className="space-y-8">
@@ -122,15 +127,15 @@ export  function BuyerAnalysis() {
                   <CircularProgress progress={75} />
                 </div>
                 <div className="col-span-3 space-y-4">
-                  <Metric delay={0.2} />
-                  <Metric delay={0.3} />
-                  <Metric delay={0.4} />
+                  <Metric />
+                  <Metric />
+                  <Metric />
                 </div>
               </div>
               <div className="space-y-4">
-                <BuyerPersona name="Buyer Persona 1" progress={80} />
-                <BuyerPersona name="Buyer Persona 2" progress={65} />
-                <BuyerPersona name="Buyer Persona 3" progress={45} />
+                <BuyerPersona name="Small Business Owner" progress={80} />
+                <BuyerPersona name="E-commerce Entrepreneur" progress={65} />
+                <BuyerPersona name="Retail Manager" progress={45} />
               </div>
             </CardContent>
           </Card>
@@ -155,7 +160,7 @@ export  function BuyerAnalysis() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            Lorem ipsum dolor sit amet consectetur. Integer tellus eu scelerisque nunc. Integer ac convallis tempus nibh ac tristique penatibus nulla a.
+            Leverage MarketMe's buyer behavior analysis tools to uncover insights that empower you to tailor your campaigns and engage with your customers more effectively.
           </motion.p>
         </motion.div>
       </div>

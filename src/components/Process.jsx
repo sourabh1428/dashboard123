@@ -5,33 +5,33 @@ import { useInView } from 'react-intersection-observer'
 const steps = [
   {
     number: '1',
-    title: 'Data Collection',
-    description: 'Gather and organize your business data from multiple sources, including sales, marketing, and customer interactions.'
+    title: 'Customer Data Collection',
+    description: 'Gather and organize customer data from your sales, marketing campaigns, and interactions to better understand your audience.'
   },
   {
     number: '2',
-    title: 'Analysis',
-    description: 'Our AI-powered analytics engine processes your data to identify patterns, trends, and insights.'
+    title: 'Data Segmentation',
+    description: 'Use advanced algorithms to categorize your customer data, making it easier to target specific segments for personalized marketing.'
   },
   {
     number: '3',
-    title: 'Visualization',
-    description: 'View your data through intuitive dashboards and interactive charts for easy understanding.'
+    title: 'Insights & Analytics',
+    description: 'Leverage powerful analytics tools to uncover valuable insights about customer behavior and campaign performance.'
   },
   {
     number: '4',
-    title: 'Prediction',
-    description: 'Leverage machine learning algorithms to forecast future trends and outcomes.'
+    title: 'Campaign Prediction',
+    description: 'Utilize predictive models to anticipate how different marketing strategies will perform, optimizing your approach.'
   },
   {
     number: '5',
-    title: 'Action',
-    description: 'Receive actionable recommendations to optimize your business strategies and operations.'
+    title: 'Actionable Recommendations',
+    description: 'Receive customized recommendations that help you fine-tune your campaigns and business strategies for maximum impact.'
   },
   {
     number: '6',
-    title: 'Iteration',
-    description: 'Continuously refine your approach based on new data and insights for ongoing improvement.'
+    title: 'Continuous Improvement',
+    description: 'Refine your marketing efforts and customer engagement strategies by incorporating real-time feedback and data insights.'
   }
 ]
 
@@ -73,4 +73,3 @@ const Process = () => {
 }
 
 export default Process
-

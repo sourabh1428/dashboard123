@@ -1,10 +1,15 @@
 'use client'
 
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { motion, useAnimation } from 'framer-motion'
 import { LineChart, BarChart } from './Charts'
+import { ArrowRight, Play, MessageCircle } from 'lucide-react'
 
 const Hero = () => {
+  const [isHovered, setIsHovered] = useState(false)
+  const controls = useAnimation()
+  const [showNotification, setShowNotification] = useState(false)
+
   const lineChartData = [
     { name: 'Jan', total: 4500 },
     { name: 'Feb', total: 3800 },
@@ -43,8 +48,24 @@ const Hero = () => {
     },
   }
 
+  useEffect(() => {
+    const sequence = async () => {
+      await controls.start({ scale: 0.85, transition: { duration: 2 } })
+      await controls.start({ scale: 1, transition: { duration: 2 } })
+      sequence()
+    }
+    sequence()
+
+    const notificationInterval = setInterval(() => {
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 3000)
+    }, 10000)
+
+    return () => clearInterval(notificationInterval)
+  }, [controls])
+
   return (
-    <section className="container mx-auto px-4 py-12 md:py-20 lg:py-24 bg-black-50 dark:bg-gray-900">
+    <section className="container mx-auto px-4 py-12 md:py-20 lg:py-24 bg-gradient-to-br from-gray-900 to-black text-white">
       <motion.div
         className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
         variants={containerVariants}
@@ -52,21 +73,23 @@ const Hero = () => {
         animate="visible"
       >
         <motion.div variants={itemVariants}>
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white-800 dark:text-gray-100"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Intelligent Insights for Agile Enterprises
-          </motion.h1>
+        <motion.h1 
+  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white"
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.2 }}
+>
+  Elevate Your Marketing Game with MarketMe
+</motion.h1>
+
           <motion.p 
-            className="text-gray-600 dark:text-gray-300 text-lg md:text-xl mb-8"
+            className="text-gray-300 text-lg md:text-xl mb-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            Transform your business with smart automation, insightful analytics, and data-driven strategies. Stay ahead of the competition with MarketMe's cutting-edge platform.
+            MarketMe empowers local businesses to connect with their audience effortlessly. 
+            Generate campaigns, manage customers, and grow your brand with cutting-edge tools designed for success.
           </motion.p>
           <motion.div 
             className="flex flex-col sm:flex-row gap-4"
@@ -77,29 +100,48 @@ const Hero = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              className="group px-8 py-3 text-lg font-semibold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center"
             >
               Get Started
+              <motion.span
+                className="ml-2"
+                initial={{ x: 0 }}
+                animate={{ x: isHovered ? 5 : 0 }}
+              >
+                <ArrowRight className="w-5 h-5" />
+              </motion.span>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 text-lg font-semibold text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-100 dark:hover:bg-gray-800 transition-colors duration-300"
+              className="group px-8 py-3 text-lg font-semibold text-purple-400 border-2 border-purple-400 rounded-lg hover:bg-purple-400 hover:text-white transition-colors duration-300 flex items-center justify-center"
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
             >
               Watch Demo
+              <motion.span
+                className="ml-2"
+                animate={{ rotate: isHovered ? 360 : 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Play className="w-5 h-5" />
+              </motion.span>
             </motion.button>
           </motion.div>
         </motion.div>
         <motion.div
           variants={containerVariants}
           className="grid grid-cols-2 gap-4"
+          animate={controls}
         >
           <motion.div
             variants={itemVariants}
-            className="col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+            className="col-span-2 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg overflow-hidden"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
           >
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Monthly Revenue</h3>
+              <h3 className="text-lg font-semibold text-gray-100">Monthly Revenue</h3>
             </div>
             <div className="h-[200px] p-4">
               <LineChart data={lineChartData} />
@@ -107,10 +149,12 @@ const Hero = () => {
           </motion.div>
           <motion.div
             variants={itemVariants}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+            className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg overflow-hidden"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
           >
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Daily Sales</h3>
+              <h3 className="text-lg font-semibold text-gray-100">Daily Sales</h3>
             </div>
             <div className="h-[200px] p-4">
               <BarChart data={barChartData} />
@@ -118,13 +162,29 @@ const Hero = () => {
           </motion.div>
           <motion.div
             variants={itemVariants}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+            className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg overflow-hidden relative"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
           >
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Product Share</h3>
+              <h3 className="text-lg font-semibold text-gray-100">WhatsApp Notifications</h3>
             </div>
             <div className="h-[200px] p-4 flex items-center justify-center">
-              <p className="text-gray-500 dark:text-gray-400">Pie Chart Coming Soon</p>
+              <motion.div
+                className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <MessageCircle className="w-8 h-8 text-white" />
+              </motion.div>
+              <motion.div
+                className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: showNotification ? 1 : 0, y: showNotification ? 0 : -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                New message!
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>
@@ -134,4 +194,3 @@ const Hero = () => {
 }
 
 export default Hero
-

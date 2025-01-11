@@ -41,10 +41,7 @@ const Navbar = () => {
         <NavLink href="#process">Process</NavLink>
         <NavLink href="#pricing">Pricing</NavLink>
       </div>
-      <div className="hidden md:flex items-center gap-4">
-        <Button variant="ghost">Log In</Button>
-        <Button>Sign Up</Button>
-      </div>
+    
       <div className="md:hidden">
         <Sheet>
           <SheetTrigger asChild>
