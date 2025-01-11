@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-
+//s
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 
