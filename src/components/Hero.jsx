@@ -50,16 +50,16 @@ const Hero = () => {
 
   useEffect(() => {
     const sequence = async () => {
-      await controls.start({ scale: 0.85, transition: { duration: 2 } })
-      await controls.start({ scale: 1, transition: { duration: 2 } })
+      await controls.start({ scale: 0.7, transition: { duration: 1 } })
+      await controls.start({ scale: 0.9, transition: { duration: 3 } })
       sequence()
     }
     sequence()
 
     const notificationInterval = setInterval(() => {
       setShowNotification(true)
-      setTimeout(() => setShowNotification(false), 3000)
-    }, 10000)
+      setTimeout(() => setShowNotification(false), 800)
+    }, 1500)
 
     return () => clearInterval(notificationInterval)
   }, [controls])

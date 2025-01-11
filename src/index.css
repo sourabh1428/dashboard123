@@ -24,6 +24,8 @@
     --input: 240 3.7% 15.9%;
     --ring: 267 100% 58%;
     --radius: 0.5rem;
+    --scrollbar-thumb: #8b5cf6;
+  --scrollbar-track: #1e1e1e;
   }
 }
  
@@ -35,13 +37,34 @@
     @apply bg-background text-foreground;
   }
 } 
-
 html {
   scroll-behavior: smooth;
-} 
+}
 
-::selection {
-  background-color: rgb(147, 51, 234);
-  color: white;
+body {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Webkit browsers like Chrome, Safari */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 20px;
+  border: 3px solid var(--scrollbar-track);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
