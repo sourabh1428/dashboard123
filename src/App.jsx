@@ -29,7 +29,7 @@ const App = () => {
         className="fixed top-0 left-0 right-0 h-0.5 bg-primary z-50"
         style={{ scaleX }}
       />
-      <div className="min-h-screen bg-background text-foreground overflow-y-auto">
+      <div className="min-h-screen bg-background text-foreground overflow-y-auto bg-gradient-to-br from-gray-900 to-black">
         <Navbar />
         <main>
           <FadeInSection>

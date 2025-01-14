@@ -12,20 +12,30 @@ const Hero = () => {
 
   const lineChartData = [
     { name: 'Jan', total: 4500 },
-    { name: 'Feb', total: 3800 },
-    { name: 'Mar', total: 5200 },
-    { name: 'Apr', total: 4800 },
-    { name: 'May', total: 6000 },
-    { name: 'Jun', total: 5500 },
-  ]
+    { name: 'Feb', total: 4700 },
+    { name: 'Mar', total: 4900 },
+    { name: 'Apr', total: 5200 },
+    { name: 'May', total: 5500 },
+    { name: 'Jun', total: 5800 },
+    { name: 'Jul', total: 6100 },
+    { name: 'Aug', total: 5900 },
+    { name: 'Sep', total: 5700 },
+    { name: 'Oct', total: 5600 },
+    { name: 'Nov', total: 5300 },
+    { name: 'Dec', total: 5000 },
+  ];
+  
 
   const barChartData = [
-    { name: 'Mon', total: 800 },
-    { name: 'Tue', total: 950 },
-    { name: 'Wed', total: 1100 },
-    { name: 'Thu', total: 950 },
-    { name: 'Fri', total: 1200 },
-  ]
+    { name: 'Mon', total: 850 },
+    { name: 'Tue', total: 900 },
+    { name: 'Wed', total: 950 },
+    { name: 'Thu', total: 1000 },
+    { name: 'Fri', total: 1050 },
+    { name: 'Sat', total: 1025 },
+    { name: 'Sun', total: 975 },
+  ];
+  
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,8 +60,8 @@ const Hero = () => {
 
   useEffect(() => {
     const sequence = async () => {
-      await controls.start({ scale: 0.7, transition: { duration: 1 } })
-      await controls.start({ scale: 0.9, transition: { duration: 3 } })
+      await controls.start({ scale: 0.99, transition: { duration: 6 } })
+      await controls.start({ scale: 1, transition: { duration: 6 } })
       sequence()
     }
     sequence()
