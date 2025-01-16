@@ -32,7 +32,7 @@ const FeatureCard = ({ icon: Icon, title, description }) => (
 
 const FeatureShowcase = () => {
   return (
-    <section className="container mx-auto px-4 py-12 md:py-20 lg:py-24 bg-gradient-to-br from-gray-900 to-black text-white">
+    <section className="container mx-auto px-4 py-12 md:py-20 lg:py-24 bg-transparent text-white">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

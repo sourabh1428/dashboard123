@@ -5,7 +5,7 @@ import { PieChart, LineChart } from 'lucide-react'
 
 const CTA = () => {
   return (
-    <section className="container mx-auto px-6 py-20 bg-gradient-to-br from-gray-900 to-black text-white">
+    <section className="container mx-auto px-6 py-20 bg-gradient-transparent text-white">
       <div className="text-center max-w-3xl mx-auto">
         <motion.h2
           className="text-3xl font-bold mb-6"

@@ -46,7 +46,7 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section className="container mx-auto px-6 py-20 bg-gradient-to-br from-gray-900 to-black text-white">
+    <section className="container mx-auto px-6 py-20 bg-transparent text-white">
       <motion.h2
         className="text-3xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 20 }}
