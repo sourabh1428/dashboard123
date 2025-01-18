@@ -4,7 +4,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, BarChart } from './Charts';
-import WhatsAppNotification from './WhatsAppNotification';
+import WhatsAppNotification from './WhatsappNotification.jsx';
 
 const DashboardStats = () => {
   const lineChartData = [
