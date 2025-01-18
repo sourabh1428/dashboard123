@@ -1,89 +1,151 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { LineChart, BarChart, PieChart } from 'lucide-react'
+import { LineChart, BarChart, PieChart, TrendingUp, Zap, Target } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { useNavigate } from 'react-router'
 
 const Analytics = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
+  const navigate = useNavigate();
+  const [hoveredChart, setHoveredChart] = useState(null);
 
   const chartVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  }
+
+  const chartData = [
+    { icon: LineChart, title: "Real-time Trends", color: "from-blue-500 to-cyan-500" },
+    { icon: BarChart, title: "Performance Metrics", color: "from-green-500 to-emerald-500" },
+    { icon: PieChart, title: "Market Segmentation", color: "from-purple-500 to-pink-500" },
+    { icon: TrendingUp, title: "Growth Analytics", color: "from-orange-500 to-red-500" },
+  ]
+
+  const features = [
+    { icon: Zap, title: "Real-time data visualization", description: "See your data come to life with instant updates and dynamic charts." },
+    { icon: Target, title: "Customizable dashboards", description: "Create the perfect view of your data with drag-and-drop simplicity." },
+    { icon: TrendingUp, title: "Predictive modeling", description: "Forecast trends and make data-driven decisions with AI-powered insights." },
+  ]
+
   return (
-    <section id="analytics" className="container mx-auto px-4 py-12 md:py-20 lg:py-24  bg-gradient-transparent text-white" ref={ref}>
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section id="analytics" className="relative overflow-hidden py-20 lg:py-32" ref={ref}>
+      <div className="absolute inset-0 z-0"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid lg:grid-cols-2 gap-16 items-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Unlock the Power of Data with Advanced Analytics
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Our cutting-edge analytics platform helps you understand trends, predict outcomes, and make data-driven decisions that keep you ahead of the curve. With MarketMe, you'll have access to:
-          </p>
-          <ul className="space-y-4 mb-8">
-            <motion.li 
-              className="flex items-center gap-4"
-              whileHover={{ scale: 1.05 }}
+          <motion.div variants={itemVariants}>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-primary to-purple-500 text-transparent bg-clip-text">
+              Unlock the Power of Data
+            </h2>
+            <p className="text-xl text-gray-300 mb-10 leading-relaxed">
+              Our cutting-edge analytics platform empowers you to understand trends, predict outcomes, and make data-driven decisions that keep you ahead of the curve.
+            </p>
+            <motion.div 
+              variants={containerVariants}
+              className="space-y-6 mb-10"
             >
-              <LineChart className="text-primary" />
-              <span>Real-time data visualization</span>
-            </motion.li>
-            <motion.li 
-              className="flex items-center gap-4"
-              whileHover={{ scale: 1.05 }}
-            >
-              <BarChart className="text-primary" />
-              <span>Customizable dashboards</span>
-            </motion.li>
-            <motion.li 
-              className="flex items-center gap-4"
-              whileHover={{ scale: 1.05 }}
-            >
-              <PieChart className="text-primary" />
-              <span>Predictive modeling and forecasting</span>
-            </motion.li>
-          </ul>
-          <Button size="lg" className="text-lg px-8">
-            Explore Analytics Features
-          </Button>
-        </motion.div>
-        <div className="grid grid-cols-2 gap-4">
-          {[1, 2, 3, 4].map((item) => (
-            <motion.div
-              key={item}
-              variants={chartVariants}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              transition={{ duration: 0.5, delay: item * 0.1 }}
-            >
-              <Card>
-                <CardContent className="p-6 flex items-center justify-center">
-                  <motion.div 
-                    className="w-16 h-16 bg-primary rounded-full flex items-center justify-center"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    {item === 1 && <LineChart className="text-background" />}
-                    {item === 2 && <BarChart className="text-background" />}
-                    {item === 3 && <PieChart className="text-background" />}
-                    {item === 4 && <LineChart className="text-background" />}
-                  </motion.div>
-                </CardContent>
-              </Card>
+              {features.map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  variants={itemVariants}
+                  className="flex items-start gap-4"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <feature.icon className="text-primary w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                    <p className="text-gray-400">{feature.description}</p>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </div>
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6 bg-gradient-to-r from-primary to-purple-500 hover:from-primary/80 hover:to-purple-500/80 transition-all duration-300"
+                onClick={() => navigate('/lead')}
+              >
+                Explore Analytics Features
+              </Button>
+            </motion.div>
+          </motion.div>
+          <motion.div 
+            variants={containerVariants}
+            className="grid grid-cols-2 gap-6"
+          >
+            {chartData.map((chart, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                onHoverStart={() => setHoveredChart(index)}
+                onHoverEnd={() => setHoveredChart(null)}
+              >
+                <Card className="bg-gray-800/50 border-gray-700 overflow-hidden">
+                  <CardContent className="p-6">
+                    <motion.div 
+                      className={`w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center bg-gradient-to-br ${chart.color}`}
+                      animate={{
+                        scale: hoveredChart === index ? [1, 1.2, 1] : 1,
+                      }}
+                      transition={{ duration: 0.5, repeat: hoveredChart === index ? Infinity : 0 }}
+                    >
+                      <chart.icon className="text-white w-10 h-10" />
+                    </motion.div>
+                    <h3 className="text-center text-lg font-semibold">{chart.title}</h3>
+                    <AnimatePresence>
+                      {hoveredChart === index && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="text-center text-gray-400 mt-2"
+                        >
+                          Click to explore {chart.title.toLowerCase()} in detail.
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 h-32"></div>
     </section>
   )
 }

@@ -2,8 +2,11 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { PieChart, LineChart } from 'lucide-react'
+import { useNavigate } from 'react-router'
 
 const CTA = () => {
+const navigator=useNavigate();
+
   return (
     <section className="container mx-auto px-6 py-20 bg-gradient-transparent text-white">
       <div className="text-center max-w-3xl mx-auto">
@@ -28,19 +31,11 @@ const CTA = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-6">
-            Start Free Trial
+          <Button className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-6" onClick={()=>navigator('/lead')}>
+            Contact us !
           </Button>
         </motion.div>
-        <motion.div
-          className="flex justify-center gap-12 mt-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <PieChart className="w-16 h-16 text-purple-600" />
-          <LineChart className="w-16 h-16 text-purple-600" />
-        </motion.div>
+        
       </div>
     </section>
   )

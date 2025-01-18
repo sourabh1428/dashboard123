@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Check } from 'lucide-react'
+import { useNavigate } from 'react-router'
 
 const plans = [
   {
@@ -45,6 +46,7 @@ const plans = [
 ]
 
 const Pricing = () => {
+  const navigate=useNavigate();
   return (
     <section className="container mx-auto px-6 py-20 bg-transparent text-white">
       <motion.h2
@@ -80,6 +82,7 @@ const Pricing = () => {
             <Button 
               className={plan.popular ? 'w-full bg-purple-600 hover: bg-purple-700 ':' w-full bg-white-600'} 
               variant={plan.popular ? 'default' : 'outline'}
+              onClick={()=>navigate('lead')}
             >
               Try it
             </Button>

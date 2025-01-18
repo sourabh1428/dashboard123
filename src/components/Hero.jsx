@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
-import { ArrowRight, Zap, Star, BarChart, Target, TrendingUp } from 'lucide-react';
+import { ArrowRight, Zap, Target, TrendingUp, BarChart } from 'lucide-react';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,9 +8,19 @@ const Hero = () => {
   const navigate = useNavigate();
   const controls = useAnimation();
   const ref = useRef(null);
-  const inView = useInView(ref);
+  const inView = useInView(ref, { once: true });
   const [text, setText] = useState('');
-  const fullText = "Supercharge your buisness with Marketme";
+  const fullText = "Supercharge your business with Marketme";
+
+  // Memoize background particles
+  const particles = useMemo(() => {
+    return Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 1.5 + 0.5,
+    }));
+  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -19,13 +29,18 @@ const Hero = () => {
   }, [controls, inView]);
 
   useEffect(() => {
+    let isMounted = true;
     const typeText = async () => {
       for (let i = 0; i <= fullText.length; i++) {
+        if (!isMounted) break;
         setText(fullText.slice(0, i));
         await new Promise(resolve => setTimeout(resolve, 50));
       }
     };
     typeText();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const containerVariants = {
@@ -33,8 +48,8 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
@@ -44,61 +59,43 @@ const Hero = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
-  const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: { 
-      scale: 1, 
-      rotate: 0,
-      transition: { 
-        type: "spring",
-        stiffness: 260,
-        damping: 20,
-        delay: 0.6
-      } 
-    },
-  };
-
-  const backgroundVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { duration: 2 }
-    },
-  };
+  const features = useMemo(() => [
+    { Icon: Zap, title: "Instant Insights", description: "Get real-time analytics and actionable insights" },
+    { Icon: Target, title: "Precision Targeting", description: "Reach your ideal audience with AI-powered segmentation" },
+    { Icon: TrendingUp, title: "Exponential Growth", description: "Scale your marketing efforts and boost ROI" },
+  ], []);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br">
-      <motion.div
-        className="absolute inset-0"
-        variants={backgroundVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {[...Array(50)].map((_, i) => (
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Optimized background animation */}
+      <div className="absolute inset-0 ">
+        {particles.map((particle) => (
           <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-white rounded-full"
+            key={particle.id}
+            className="absolute w-1 h-1 bg-white/20 rounded-full"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
             }}
             animate={{
-              scale: [0, 1, 0],
-              opacity: [0, 1, 0],
+              y: [0, -20, 0],
+              opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: 3 + Math.random() * 2,
               repeat: Infinity,
-              repeatType: "loop",
               ease: "easeInOut",
+              delay: Math.random() * 2,
             }}
           />
         ))}
-      </motion.div>
+      </div>
 
       <motion.div
         variants={containerVariants}
@@ -121,6 +118,7 @@ const Hero = () => {
           </motion.p>
           <motion.div 
             variants={itemVariants}
+            className="transform-gpu"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -138,18 +136,26 @@ const Hero = () => {
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}
         >
-          {[
-            { Icon: Zap, title: "Instant Insights", description: "Get real-time analytics and actionable insights" },
-            { Icon: Target, title: "Precision Targeting", description: "Reach your ideal audience with AI-powered segmentation" },
-            { Icon: TrendingUp, title: "Exponential Growth", description: "Scale your marketing efforts and boost ROI" },
-          ].map((item, index) => (
+          {features.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 text-center"
+              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center transform-gpu"
               variants={itemVariants}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
+              whileHover={{ 
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
             >
-              <motion.div variants={iconVariants}>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ 
+                  delay: 0.2 + index * 0.1,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15
+                }}
+              >
                 <item.Icon className="w-12 h-12 mx-auto mb-4 text-purple-400" />
               </motion.div>
               <h3 className="text-xl font-semibold mb-2 text-white">{item.title}</h3>
@@ -161,10 +167,16 @@ const Hero = () => {
 
       <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
+        animate={{ 
+          y: [-5, 5, -5],
+          transition: {
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }
+        }}
       >
-        <BarChart className="w-8 h-8 text-purple-400" />
+        <BarChart className="w-8 h-8 text-purple-400/50" />
       </motion.div>
     </section>
   );
