@@ -5,10 +5,19 @@ import App from './App.jsx'
 import { Analytics } from "@vercel/analytics/react"
 //ss
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { BrowserRouter } from 'react-router'
+import App2 from './App2,'
+
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+    <App2/>   
+
+ 
     <Analytics />
     <SpeedInsights />
+  </BrowserRouter>
   </StrictMode>,
 )

@@ -1,216 +1,173 @@
-'use client'
-
-import React, { useState, useEffect } from 'react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
-import { LineChart, BarChart } from './Charts'
-import { ArrowRight, Play, MessageCircle, Zap, Star } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
+import { ArrowRight, Zap, Star, BarChart, Target, TrendingUp } from 'lucide-react';
+import { Button } from './ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-  const [isHovered, setIsHovered] = useState(false)
-  const [showNotification, setShowNotification] = useState(false)
+  const navigate = useNavigate();
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const inView = useInView(ref);
+  const [text, setText] = useState('');
+  const fullText = "Supercharge your buisness with Marketme";
 
-  const lineChartData = [
-    { name: 'Jan', total: 4500 },
-    { name: 'Feb', total: 4700 },
-    { name: 'Mar', total: 4900 },
-    { name: 'Apr', total: 5200 },
-    { name: 'May', total: 5500 },
-    { name: 'Jun', total: 5800 },
-    { name: 'Jul', total: 6100 },
-    { name: 'Aug', total: 5900 },
-    { name: 'Sep', total: 5700 },
-    { name: 'Oct', total: 5600 },
-    { name: 'Nov', total: 5300 },
-    { name: 'Dec', total: 5000 },
-  ];
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
 
-  const barChartData = [
-    { name: 'Mon', total: 850 },
-    { name: 'Tue', total: 900 },
-    { name: 'Wed', total: 950 },
-    { name: 'Thu', total: 1000 },
-    { name: 'Fri', total: 1050 },
-    { name: 'Sat', total: 1025 },
-    { name: 'Sun', total: 975 },
-  ];
+  useEffect(() => {
+    const typeText = async () => {
+      for (let i = 0; i <= fullText.length; i++) {
+        setText(fullText.slice(0, i));
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    };
+    typeText();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-      },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
-  const buttonVariants = {
-    hover: { scale: 1.05, transition: { duration: 0.3 } },
-    tap: { scale: 0.95 },
-  }
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: { 
+      scale: 1, 
+      rotate: 0,
+      transition: { 
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+        delay: 0.6
+      } 
+    },
+  };
 
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const rotateX = useTransform(y, [-100, 100], [5, -5])
-  const rotateY = useTransform(x, [-100, 100], [-5, 5])
-
-  useEffect(() => {
-    const notificationInterval = setInterval(() => {
-      setShowNotification(true)
-      setTimeout(() => setShowNotification(false), 800)
-    }, 5000)
-
-    return () => clearInterval(notificationInterval)
-  }, [])
+  const backgroundVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { duration: 2 }
+    },
+  };
 
   return (
-    <section className="container mx-auto px-4 py-8 md:py-12 lg:py-16 bg-transparent text-white overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br">
       <motion.div
-        className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center"
-        variants={containerVariants}
+        className="absolute inset-0"
+        variants={backgroundVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={itemVariants} className="w-full lg:w-1/2">
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white rounded-full"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              scale: [0, 1, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </motion.div>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={controls}
+        className="container mx-auto px-4 z-10"
+      >
+        <div className="max-w-4xl mx-auto text-center">
           <motion.h1 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-white-500 to-black-500"
+            className="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+            variants={itemVariants}
           >
-            Elevate Your Marketing Game with MarketMe
+            MarketMe
           </motion.h1>
           <motion.p 
-            className="text-gray-200 text-base md:text-lg mb-6 max-w-2xl"
+            className="text-gray-300 text-xl md:text-3xl mb-8 font-light"
             variants={itemVariants}
           >
-            MarketMe empowers local businesses to connect with their audience effortlessly. 
-            Generate campaigns, manage customers, and grow your brand with cutting-edge tools designed for success.
+            {text}
           </motion.p>
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4"
             variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <motion.button
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
-              className="group px-6 py-2 text-base md:text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center shadow-lg"
+            <Button
+              onClick={() => navigate('/lead')}
+              className="group px-8 py-4 text-xl font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              Get Started
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </motion.button>
-           
+              Get a Free Demo
+              <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </motion.div>
-        </motion.div>
-        <motion.div
+        </div>
+
+        <motion.div 
+          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}
-          className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4"
-          style={{
-            perspective: 1000,
-          }}
         >
-          <motion.div
-            style={{ x, y, rotateX, rotateY, z: 100 }}
-            drag
-            dragElastic={0.16}
-            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-            whileTap={{ cursor: "grabbing" }}
-            className="col-span-2 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg overflow-hidden"
-          >
-            <div className="p-3 md:p-4" aria-label="Monthly Revenue Chart">
-              <h3 className="text-base md:text-lg font-semibold text-gray-100">Monthly Revenue</h3>
-            </div>
-            <div className="h-[150px] md:h-[200px] p-2 md:p-4">
-              <LineChart data={lineChartData} />
-            </div>
-          </motion.div>
-          <motion.div
-            variants={itemVariants}
-            className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="p-3 md:p-4" aria-label="Daily Sales Chart">
-              <h3 className="text-base md:text-lg font-semibold text-gray-100">Daily Sales</h3>
-            </div>
-            <div className="h-[150px] md:h-[200px] p-2 md:p-4">
-              <BarChart data={barChartData} />
-            </div>
-          </motion.div>
-          <motion.div
-            variants={itemVariants}
-            className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 relative"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="p-3 md:p-4" aria-label="WhatsApp Notifications">
-              <h3 className="text-base md:text-lg font-semibold text-gray-100">WhatsApp Notifications</h3>
-            </div>
-            <div className="h-[150px] md:h-[200px] p-2 md:p-4 flex items-center justify-center bg-gradient-to-br from-green-400 to-green-600 rounded-lg">
-              <motion.div
-                className="w-12 h-12 md:w-16 md:h-16 bg-green-500 rounded-full flex items-center justify-center"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <MessageCircle className="w-6 h-6 md:w-8 md:h-8 text-white" />
+          {[
+            { Icon: Zap, title: "Instant Insights", description: "Get real-time analytics and actionable insights" },
+            { Icon: Target, title: "Precision Targeting", description: "Reach your ideal audience with AI-powered segmentation" },
+            { Icon: TrendingUp, title: "Exponential Growth", description: "Scale your marketing efforts and boost ROI" },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 text-center"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
+            >
+              <motion.div variants={iconVariants}>
+                <item.Icon className="w-12 h-12 mx-auto mb-4 text-purple-400" />
               </motion.div>
-              <motion.div
-                className="absolute top-2 right-2 md:top-4 md:right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs md:text-sm font-semibold"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: showNotification ? 1 : 0, y: showNotification ? 0 : -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                New message!
-              </motion.div>
-            </div>
-          </motion.div>
+              <h3 className="text-xl font-semibold mb-2 text-white">{item.title}</h3>
+              <p className="text-gray-300">{item.description}</p>
+            </motion.div>
+          ))}
         </motion.div>
       </motion.div>
-      <motion.div 
-        className="absolute top-4 left-4 md:top-10 md:left-10"
-        animate={{
-          scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 4,
-          ease: "easeInOut",
-          times: [0, 0.5, 1],
-          repeat: Infinity,
-        }}
+
+      <motion.div
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
       >
-        <Zap className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 filter drop-shadow-lg" />
-      </motion.div>
-      <motion.div 
-        className="absolute bottom-4 right-4 md:bottom-10 md:right-10"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 45, 0],
-        }}
-        transition={{
-          duration: 5,
-          ease: "easeInOut",
-          times: [0, 0.5, 1],
-          repeat: Infinity,
-        }}
-      >
-        <Star className="w-6 h-6 md:w-8 md:h-8 text-purple-400 filter drop-shadow-lg" />
+        <BarChart className="w-8 h-8 text-purple-400" />
       </motion.div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
-
+export default Hero;

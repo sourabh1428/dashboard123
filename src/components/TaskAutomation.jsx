@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion } from "framer-motion"
 import { Plus, MoreHorizontal } from 'lucide-react'
+import { useNavigate } from 'react-router'
 
 const tasks = [
   {
@@ -70,7 +71,15 @@ const TaskItem = ({ task, index }) => (
   </motion.div>
 )
 
+
 export function TaskAutomation() {
+  const navigate=useNavigate();
+
+function handleLead(){
+  console.log("lead generation");
+  
+  navigate('/lead')
+}
   return (
     <section className="py-20 px-6 bg-gradient-transparent text-white text-white">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -102,6 +111,7 @@ export function TaskAutomation() {
             transition={{ delay: 0.4 }}
           >
             <Button 
+              onClick={handleLead}
               className="bg-purple-600 hover:bg-purple-700 text-white"
             >
               Start Automating Now
