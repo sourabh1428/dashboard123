@@ -37,7 +37,7 @@ const CustomerJourney = () => {
     >
       <h1 className="text-4xl font-bold mb-8 text-center text-gray-800 ">Customer Journey</h1>
       <motion.div className="space-y-12 "  variants={itemVariants}>
-        <div ></>
+      
         <OrderConfirmation />
         <InvoiceGeneration />
         <CustomerDashboard />
