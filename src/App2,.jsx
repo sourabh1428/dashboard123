@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes,Route } from 'react-router'
 import App from './App'
 import Leads from './components/Leads'
-
+//2
 const App2 = () => {
   return (
     <div>
