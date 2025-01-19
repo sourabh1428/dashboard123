@@ -12,7 +12,7 @@ const questions = [
   { id: 4, label: "What's your company name?", icon: Briefcase, type: "text", name: "companyName" },
   { id: 5, label: "Location", icon: Building, type: "text", name: "location" },
 ]
-
+//asas
 const ThankYouMessage = ({ onComplete }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
