@@ -5,8 +5,8 @@ export default defineConfig({
   plugins: [react()],
   base: './', // Ensures relative paths for assets
   build: {
-    outDir: 'dist', // Default output directory
-    assetsDir: 'assets', // Directory for static assets
+    outDir: './dist', // Default output directory
+   
   },
   server: {
     open: true, // Opens the browser on local development
