@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Menu } from 'lucide-react'
-
+import imgSrc from '../assets/logo.png'
 const NavLink = ({ href, children, mobile }) => (
   <motion.a
     href={href}
@@ -33,7 +33,10 @@ const Navbar = () => {
         whileTap={{ scale: 0.95 }}
       >
         <div className="w-8 h-8 bg-primary rounded-lg" />
-        <span className="text-xl font-bold">MarketMe</span>
+        <span className="text-xl font-bold">
+      
+
+        </span>
       </motion.div>
       <div className="hidden md:flex items-center gap-8">
         <NavLink href="#features">Features</NavLink>
