@@ -8,6 +8,10 @@ import {
 } from "@/components/ui/sheet"
 import { Menu } from 'lucide-react'
 import imgSrc from '../assets/logo.png'
+import { useNavigate } from 'react-router'
+
+
+
 const NavLink = ({ href, children, mobile }) => (
   <motion.a
     href={href}
@@ -20,6 +24,10 @@ const NavLink = ({ href, children, mobile }) => (
 )
 
 const Navbar = () => {
+    const navigate=useNavigate();
+    
+
+
   return (
     <motion.nav 
       className="container mx-auto py-4 px-6 flex justify-between items-center"
@@ -58,7 +66,7 @@ const Navbar = () => {
               <NavLink href="#analytics" mobile>Analytics</NavLink>
               <NavLink href="#process" mobile>Process</NavLink>
               <NavLink href="#pricing" mobile>Pricing</NavLink>
-              <Button className="w-full mt-4">Sign Up</Button>
+              <Button className="w-full mt-4" onClick={()=>navigate('/lead')}>Sign Up</Button>
             </div>
           </SheetContent>
         </Sheet>
