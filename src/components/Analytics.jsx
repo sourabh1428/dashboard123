@@ -82,8 +82,8 @@ const Analytics = () => {
                     <feature.icon className="text-primary w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-gray-400">{feature.description}</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                    <p className="text-white-400">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -125,14 +125,14 @@ const Analytics = () => {
                     >
                       <chart.icon className="text-white w-10 h-10" />
                     </motion.div>
-                    <h3 className="text-center text-lg font-semibold">{chart.title}</h3>
+                    <h3 className="text-center text-lg font-semibold text-white">{chart.title}</h3>
                     <AnimatePresence>
                       {hoveredChart === index && (
                         <motion.p
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="text-center text-gray-400 mt-2"
+                          className="text-center text-white-400 mt-2 text-white"
                         >
                           Click to explore {chart.title.toLowerCase()} in detail.
                         </motion.p>
