@@ -162,7 +162,7 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto text-center">
           <motion.h1 
             variants={itemVariants}
-            className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
+            className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-black-400"
           >
             MarketMe
           </motion.h1>
@@ -187,7 +187,7 @@ const Hero = () => {
           >
             <Button
               onClick={() => navigate('/lead')}
-              className="group px-8 py-4 text-xl bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-purple-500/25"
+              className="group px-8 py-4 text-xl bg-gradient-to-r from-purple-600 to-white-600 rounded-full hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-purple-500/25"
             >
               Get Started
               <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
