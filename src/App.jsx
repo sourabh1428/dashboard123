@@ -149,7 +149,7 @@ const App = () => {
 
             {/* Globe Layer - Isolated from backdrop blur */}
             <div className="relative z-30">
-              <InteractiveGlobe />
+            
             </div>
 
             {/* Content Layer with backdrop blur */}
