@@ -47,10 +47,8 @@ const Navbar = () => {
         </span>
       </motion.div>
       <div className="hidden md:flex items-center gap-8">
-        <NavLink href="#features">Features</NavLink>
-        <NavLink href="#analytics">Analytics</NavLink>
-        <NavLink href="#process">Process</NavLink>
-        <NavLink href="#pricing">Pricing</NavLink>
+        <NavLink href="#features" onClick={()=>{navigator('/lead')}}>Signup</NavLink>
+       
       </div>
     
       <div className="md:hidden">
@@ -62,10 +60,7 @@ const Navbar = () => {
           </SheetTrigger>
           <SheetContent>
             <div className="flex flex-col gap-4 mt-8">
-              <NavLink href="#features" mobile>Features</NavLink>
-              <NavLink href="#analytics" mobile>Analytics</NavLink>
-              <NavLink href="#process" mobile>Process</NavLink>
-              <NavLink href="#pricing" mobile>Pricing</NavLink>
+              
               <Button className="w-full mt-4" onClick={()=>navigate('/lead')}>Sign Up</Button>
             </div>
           </SheetContent>
