@@ -64,8 +64,8 @@ const Analytics = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-primary to-purple-500 text-transparent bg-clip-text">
               Unlock the Power of Data
             </h2>
-            <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-              Our cutting-edge analytics platform empowers you to understand trends, predict outcomes, and make data-driven decisions that keep you ahead of the curve.
+            <p className="text-3xl p-10 font-bold bg-gradient-to-r from-purple-600 to-black text-transparent bg-clip-text">
+              Our cutting-edge analytics platform empowers you to understand trends, predict outcomes!
             </p>
             <motion.div 
               variants={containerVariants}
@@ -95,7 +95,7 @@ const Analytics = () => {
             >
               <Button 
                 size="lg" 
-                className="text-lg px-8 py-6 bg-gradient-to-r from-primary to-purple-500 hover:from-primary/80 hover:to-purple-500/80 transition-all duration-300"
+                className="text-lg px-8 py-6 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-primary/80 hover:to-purple-500/80 transition-all duration-300"
                 onClick={() => navigate('/lead')}
               >
                 Explore Analytics Features

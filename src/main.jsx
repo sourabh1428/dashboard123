@@ -10,6 +10,7 @@ import App2 from './App2,'
 
 
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

@@ -144,9 +144,9 @@ const Hero = () => {
         ))}
 
         {/* Rotating Globe */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-50">
+        {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-50">
           <Globe />
-        </div>
+        </div> */}
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t" />
@@ -187,7 +187,7 @@ const Hero = () => {
           >
             <Button
               onClick={() => navigate('/lead')}
-              className="group px-8 py-4 text-xl bg-gradient-to-r from-purple-600 to-white-600 rounded-full hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-purple-500/25"
+              className="group px-8 py-4 text-xl bg-gradient-to-r from-purple-600 to-white-600 rounded-full hover:from-purple-700 shadow-lg hover:shadow-purple-500/25"
             >
               Get Started
               <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />

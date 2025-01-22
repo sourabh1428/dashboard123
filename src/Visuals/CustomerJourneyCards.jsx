@@ -50,7 +50,7 @@ const CustomerJourney = () => {
           transition={{ delay: 0.2 }}
         >
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 mb-4"
+            className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-black-600 mb-4"
           >
             Your Customer Journey
           </motion.h2>

@@ -90,7 +90,7 @@ function handleLead(){
           className="space-y-6"
         >
           <motion.h2 
-            className="text-4xl font-bold"
+            className=" text-4xl font-bold bg-gradient-to-r from-purple-600 to-black text-transparent bg-clip-text"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
