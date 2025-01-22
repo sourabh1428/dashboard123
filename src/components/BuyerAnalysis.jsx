@@ -107,7 +107,7 @@ const CardContent = ({ children, className }) => (
   </div>
 )
 
-export function BuyerAnalysis() {
+ function BuyerAnalysis() {
   return (
     <section className="py-20 px-6 bg-gradient-transparent text-white text-white">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -168,3 +168,4 @@ export function BuyerAnalysis() {
   )
 }
 
+export default React.memo(BuyerAnalysis)

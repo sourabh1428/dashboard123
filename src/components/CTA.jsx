@@ -41,5 +41,5 @@ const navigator=useNavigate();
   )
 }
 
-export default CTA
+export default React.memo(CTA);
 

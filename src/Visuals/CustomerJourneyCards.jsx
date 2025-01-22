@@ -204,4 +204,4 @@ const TimelineStep = ({
   );
 };
 
-export default CustomerJourney;
+export default React.memo(CustomerJourney);

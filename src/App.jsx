@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState, useMemo, Suspense } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavBar";
@@ -9,7 +9,7 @@ import Pricing from "./components/Pricing";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 import FeatureShowcase from "./components/FeatureShowCase";
-import { BuyerAnalysis } from "./components/BuyerAnalysis";
+import  BuyerAnalysis  from "./components/BuyerAnalysis";
 import { TaskAutomation } from "./components/TaskAutomation";
 import CustomerJourneyCards from "./Visuals/CustomerJourneyCards";
 import ScrollToTopButton from "./components/ScrollToTopButton";
@@ -17,6 +17,7 @@ import Leads from "./components/Leads";
 import DashboardStats from "./components/DashboardStats";
 import InteractiveGlobe from "./Visuals/InteractiveGlobe";
 import EnhancedAnimations from "./Visuals/EnhancedAnimation";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const Parallax = ({ children, speed = 10 }) => {
   const ref = useRef(null);
@@ -117,7 +118,24 @@ const App = () => {
     restDelta: 0.001,
   });
 
-  return (
+  const memoizedComponents = useMemo(
+    () => (
+      <>
+        <Suspense fallback={<LoadingSpinner />}>
+      
+              <DashboardStats />
+                    <BuyerAnalysis />
+                    <TaskAutomation />
+                    <Analytics />
+        </Suspense>
+      </>
+    ),
+    [],
+  )
+
+  return (<div style={{
+  
+  }}>
     <Routes>
       <Route
         path="/"
@@ -202,11 +220,8 @@ const App = () => {
                     >
                              <Pricing />
                     </motion.div>
+                    <main className="container mx-auto px-4 space-y-32 py-24">{memoizedComponents}</main>
 
-                    <DashboardStats />
-                    <BuyerAnalysis />
-                    <TaskAutomation />
-                    <Analytics />
                  
             
 
@@ -256,7 +271,8 @@ const App = () => {
         }
       />
     </Routes>
+    </div>
   );
 };
 
-export default App;
+export default React.memo(App);

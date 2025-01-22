@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Check } from 'lucide-react'
 import { useNavigate } from 'react-router'
+import ZoomInEffect from '@/Visuals/ZoomInEffect'
 
 const plans = [
   {
@@ -48,6 +49,7 @@ const plans = [
 const Pricing = () => {
   const navigate=useNavigate();
   return (
+    <ZoomInEffect>
     <section className="container mx-auto px-6 py-20 bg-transparent text-white">
       <motion.h2
         className="text-5xl font-bold text-center mb-12 text-4xl font-bold bg-gradient-to-r from-purple-600 to-black text-transparent bg-clip-text"
@@ -90,6 +92,7 @@ const Pricing = () => {
         ))}
       </div>
     </section>
+    </ZoomInEffect>
   )
 }
 

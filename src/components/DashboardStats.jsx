@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, Users, DollarSign, Activity } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import WhatsAppNotification from './WhatsappNotification';
+import ZoomInEffect from '@/Visuals/ZoomInEffect';
 
 const AnimatedNumber = ({ value }) => {
   const [displayValue, setDisplayValue] = useState(value);
@@ -137,6 +138,7 @@ const DashboardStats = () => {
   ];
 
   return (
+    <ZoomInEffect>
     <section className="py-8 md:py-12">
       <div className="container mx-auto px-4">
         {/* Stats Cards */}
@@ -266,7 +268,8 @@ const DashboardStats = () => {
         </div>
       </div>
     </section>
+    </ZoomInEffect>
   );
 };
 
-export default DashboardStats;
+export default React.memo(DashboardStats);

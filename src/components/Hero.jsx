@@ -3,6 +3,7 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import { ArrowRight, Zap, Target, TrendingUp } from 'lucide-react';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router-dom';
+import ZoomInEffect from '@/Visuals/ZoomInEffect';
 
 const Globe = () => (
   <motion.div
@@ -132,6 +133,7 @@ const Hero = () => {
   ];
 
   return (
+    <ZoomInEffect>
     <div ref={ref} className="relative min-h-screen overflow-hidden bg-gradient-to-b">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -227,7 +229,8 @@ const Hero = () => {
         </motion.div>
       </motion.div>
     </div>
+    </ZoomInEffect>
   );
 };
 
-export default Hero;
+export default React.memo(Hero);

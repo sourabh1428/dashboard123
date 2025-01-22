@@ -56,4 +56,4 @@ const InteractiveFeatures = () => {
   )
 }
 
-export default InteractiveFeatures
+export default React.memo(InteractiveFeatures)

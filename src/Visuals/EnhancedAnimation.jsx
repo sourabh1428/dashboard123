@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const EnhancedAnimations = () => {
     const mouseX = useMotionValue(0);
@@ -97,5 +97,6 @@ const EnhancedAnimations = () => {
       </div>
     );
   };
+
   
-  export default EnhancedAnimations;
+  export default React.memo(EnhancedAnimations);
