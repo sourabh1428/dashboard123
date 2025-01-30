@@ -47,7 +47,7 @@ const Navbar = () => {
         </span>
       </motion.div>
       <div className="hidden md:flex items-center gap-8">
-        <NavLink href="#features" onClick={()=>{navigator('/lead')}}>Signup</NavLink>
+        <NavLink href="/lead" onClick={()=>{navigator('/lead')}}>Signup</NavLink>
        
       </div>
     
