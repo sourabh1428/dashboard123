@@ -16,6 +16,7 @@ import Leads from "./components/Leads";
 import DashboardStats from "./components/DashboardStats";
 import EnhancedAnimations from "./Visuals/EnhancedAnimation";
 import LoadingSpinner from "./components/LoadingSpinner";
+import SandBox from "./SandBox/SandBox";
 
 const Parallax = ({ children, speed = 10 }) => {
   const ref = useRef(null);
@@ -247,9 +248,11 @@ const App = () => {
             </motion.div>
           }
         />
+        <Route path="/sandbox" element={<SandBox/>}/>
       </Routes>
     </div>
   );
 };
+
 
 export default React.memo(App);

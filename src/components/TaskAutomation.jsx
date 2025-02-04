@@ -95,7 +95,7 @@ function handleLead(){
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Automate Your Marketing Tasks with MarketMe
+            Automate Your Marketing Tasks with Easibill
           </motion.h2>
           <motion.p 
             className="text-gray-400 text-lg"
@@ -132,7 +132,7 @@ function handleLead(){
         >
           <Card>
             <div className="flex items-center justify-between p-6 border-b border-gray-800">
-              <h3 className="text-xl font-semibold">Your Tasks in MarketMe</h3>
+              <h3 className="text-xl font-semibold">Your Tasks in Easibill</h3>
               <MoreHorizontal className="h-5 w-5 text-gray-500" />
             </div>
             <div className="p-6 space-y-4">

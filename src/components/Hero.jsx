@@ -92,7 +92,7 @@ const Hero = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   const [text, setText] = useState('');
-  const fullText = "Supercharge your business with Marketme";
+  const fullText = "Supercharge your business with Easibill";
 
   useEffect(() => {
     let isMounted = true;
@@ -166,7 +166,7 @@ const Hero = () => {
             variants={itemVariants}
             className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-black-400"
           >
-            MarketMe
+            Easibill
           </motion.h1>
           
           <motion.p 

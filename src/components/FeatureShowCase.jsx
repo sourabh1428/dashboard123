@@ -6,12 +6,12 @@ import { ArrowUpRight, Zap, Shield, Globe, Cpu, Cloud } from 'lucide-react'
 import ZoomInEffect from '@/Visuals/ZoomInEffect'
 
 const features = [
-  { icon: Zap, title: 'Effortless Campaigns', description: 'Create and launch campaigns with ease using MarketMe.' },
+  { icon: Zap, title: 'Effortless Campaigns', description: 'Create and launch campaigns with ease using Easibill.' },
   { icon: Shield, title: 'Secure Data', description: 'Your customer data is safeguarded with enterprise-grade security.' },
   { icon: Globe, title: 'Reach Everywhere', description: 'Expand your business globally with our powerful tools.' },
   { icon: Cpu, title: 'AI-Driven Insights', description: 'Harness AI for actionable insights and smarter decisions.' },
-  { icon: Cloud, title: 'Cloud-First Platform', description: 'MarketMe operates seamlessly on the cloud for reliability.' },
-  { icon: ArrowUpRight, title: 'Scale with Ease', description: 'MarketMe grows with your business, no matter the size.' },
+  { icon: Cloud, title: 'Cloud-First Platform', description: 'Easibill operates seamlessly on the cloud for reliability.' },
+  { icon: ArrowUpRight, title: 'Scale with Ease', description: 'Easibill grows with your business, no matter the size.' },
 ]
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
@@ -43,10 +43,10 @@ const FeatureShowcase = () => {
       >
         <Badge variant="outline" className="mb-4 text-white-400 border-purple-400">Features</Badge>
         <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-white">
-          Unlock Growth with MarketMe
+          Unlock Growth with Easibill
         </h2>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          Discover how MarketMe's innovative platform can transform your marketing efforts and drive success.
+          Discover how Easibill's innovative platform can transform your marketing efforts and drive success.
         </p>
       </motion.div>
       <motion.div 

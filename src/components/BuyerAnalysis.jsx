@@ -160,7 +160,7 @@ const CardContent = ({ children, className }) => (
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            Leverage MarketMe's buyer behavior analysis tools to uncover insights that empower you to tailor your campaigns and engage with your customers more effectively.
+            Leverage Easibill's buyer behavior analysis tools to uncover insights that empower you to tailor your campaigns and engage with your customers more effectively.
           </motion.p>
         </motion.div>
       </div>

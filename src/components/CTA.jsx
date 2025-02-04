@@ -24,7 +24,7 @@ const navigator=useNavigate();
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Join thousands of businesses using MarketMe to transform their operations and drive growth.
+          Join thousands of businesses using Easibill to transform their operations and drive growth.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
