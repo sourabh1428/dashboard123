@@ -9,7 +9,7 @@ const questions = [
   { id: 1, label: "What's your name?", icon: User, type: "text", name: "name", required: true },
   { id: 2, label: "What's your email address?", icon: Mail, type: "email", name: "email", required: true },
   { id: 3, label: "What's your mobile number?", icon: Phone, type: "tel", name: "mobile", required: true, pattern: "[0-9]{10}" },
-  { id: 4, label: "What's your company name?", icon: Briefcase, type: "text", name: "companyName", required: true },
+  { id: 4, label: "What's your shop name?", icon: Briefcase, type: "text", name: "companyName", required: true },
   { id: 5, label: "Location", icon: Building, type: "text", name: "location", required: true },
 ]
 
