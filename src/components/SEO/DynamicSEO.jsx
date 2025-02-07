@@ -1,6 +1,6 @@
 // src/components/SEO/DynamicSEO.jsx
 import { Helmet } from 'react-helmet-async';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const DynamicSEO = ({ 
   title = "Easibill - #1 GST Billing Software for Small Business in India 2024",
@@ -10,7 +10,7 @@ export const DynamicSEO = ({
 }) => {
   const location = useLocation();
   const canonicalUrl = `https://easibill.site${location.pathname}`;
-
+  const navigate=useNavigate();
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -95,56 +95,129 @@ export const RichSnippets = ({ reviews, faq }) => {
 };
 
 // src/components/Layout/SeoFooter.jsx
+import React from 'react';
+
+
 export const SeoFooter = () => {
+  const navigate = useNavigate();
+
+  const linkClasses = "cursor-pointer text-white hover:text-blue-400 transition-colors";
+
   return (
-    <footer className="bg-gray-100 py-12">
+    <footer className="bg-gray-900 py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Billing Software Features */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Billing Software Features</h3>
+            <h3 className="font-bold text-lg mb-4 text-white">Billing Software Features</h3>
             <ul className="space-y-2">
-              <li><a href="/features/gst-billing">GST Billing</a></li>
-              <li><a href="/features/inventory">Inventory Management</a></li>
-              <li><a href="/features/reports">Business Reports</a></li>
-              <li><a href="/features/invoicing">Quick Invoicing</a></li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  GST Billing
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Inventory Management
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Business Reports
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Quick Invoicing
+                </a>
+              </li>
             </ul>
           </div>
+
+          {/* Industries */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Industries</h3>
+            <h3 className="font-bold text-lg mb-4 text-white">Industries</h3>
             <ul className="space-y-2">
-              <li><a href="/industries/retail">Retail Stores</a></li>
-              <li><a href="/industries/wholesale">Wholesale Business</a></li>
-              <li><a href="/industries/restaurant">Restaurants</a></li>
-              <li><a href="/industries/services">Service Providers</a></li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Retail Stores
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Wholesale Business
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Restaurants
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Service Providers
+                </a>
+              </li>
             </ul>
           </div>
+
+          {/* Resources */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Resources</h3>
+            <h3 className="font-bold text-lg mb-4 text-white">Resources</h3>
             <ul className="space-y-2">
-              <li><a href="/blog">Blog</a></li>
-              <li><a href="/guides">User Guides</a></li>
-              <li><a href="/tutorials">Video Tutorials</a></li>
-              <li><a href="/case-studies">Case Studies</a></li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  User Guides
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/lead')} className={linkClasses}>
+                  Video Tutorials
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/case-studies')} className={linkClasses}>
+                  Case Studies
+                </a>
+              </li>
             </ul>
           </div>
+
+          {/* Contact & Support */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Contact & Support</h3>
+            <h3 className="font-bold text-lg mb-4 text-white">Contact & Support</h3>
             <ul className="space-y-2">
-              <li><a href="/contact">Contact Us</a></li>
-              <li><a href="/support">Customer Support</a></li>
-              <li><a href="/demo">Request Demo</a></li>
-              <li><a href="/pricing">Pricing Plans</a></li>
+              <li>
+                <a onClick={() => navigate('/lead')} className={linkClasses}>
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/lead')} className={linkClasses}>
+                  Customer Support
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/lead')} className={linkClasses}>
+                  Request Demo
+                </a>
+              </li>
+              
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-300">
-          <p className="text-sm text-gray-600">
-            Easibill is India's leading GST billing software for small businesses, 
-            retailers, and entrepreneurs. Our easy-to-use billing software helps you 
-            create professional invoices, manage inventory, and grow your business.
+
+        <div className="mt-8 pt-8 border-t border-gray-700">
+          <p className="text-sm text-gray-400">
+            Easibill is India's leading GST billing software for small businesses, retailers, and entrepreneurs. Our easy-to-use billing software helps you create professional invoices, manage inventory, and grow your business.
           </p>
-          <p className="mt-4 text-sm text-gray-600">
-            © {new Date().getFullYear()} Easibill - GST Billing Software. All rights reserved.
+          <p className="mt-4 text-sm text-gray-400">
+            © {new Date().getFullYear()} Easibill - New generation Billing Software. All rights reserved.
           </p>
         </div>
       </div>

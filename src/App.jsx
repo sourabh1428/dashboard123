@@ -17,6 +17,8 @@ import DashboardStats from "./components/DashboardStats";
 import EnhancedAnimations from "./Visuals/EnhancedAnimation";
 import LoadingSpinner from "./components/LoadingSpinner";
 import SandBox from "./SandBox/SandBox";
+import { SeoFooter } from "./components/SEO/DynamicSEO";
+
 
 const Parallax = ({ children, speed = 10 }) => {
   const ref = useRef(null);
@@ -220,6 +222,7 @@ const App = () => {
                   >
                     <Footer />
                   </motion.footer>
+                  <SeoFooter />
                 </div>
               </motion.div>
 

@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')).render(
  
     <Analytics />
     <SpeedInsights />
-    <SeoFooter />
+    
     </HelmetProvider>
   </BrowserRouter>
   </StrictMode>,
