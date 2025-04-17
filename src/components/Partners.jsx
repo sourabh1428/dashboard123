@@ -2,14 +2,14 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 const partners = [
-  { id: 1, name: 'TechCorp', logo: 'https://via.placeholder.com/150?text=TechCorp' },
-  { id: 2, name: 'InnovateCo', logo: 'https://via.placeholder.com/150?text=InnovateCo' },
-  { id: 3, name: 'FutureTech', logo: 'https://via.placeholder.com/150?text=FutureTech' },
-  { id: 4, name: 'DataDrive', logo: 'https://via.placeholder.com/150?text=DataDrive' },
-  { id: 5, name: 'AIVentures', logo: 'https://via.placeholder.com/150?text=AIVentures' },
-  { id: 6, name: 'CloudNine', logo: 'https://via.placeholder.com/150?text=CloudNine' },
-  { id: 7, name: 'SmartSys', logo: 'https://via.placeholder.com/150?text=SmartSys' },
-  { id: 8, name: 'NextGen', logo: 'https://via.placeholder.com/150?text=NextGen' },
+  { id: 1, name: 'TechCorp', logo: 'https://img.icons8.com/color/150/000000/microsoft.png' },
+  { id: 2, name: 'InnovateCo', logo: 'https://img.icons8.com/color/150/000000/google-logo.png' },
+  { id: 3, name: 'FutureTech', logo: 'https://img.icons8.com/color/150/000000/amazon.png' },
+  { id: 4, name: 'DataDrive', logo: 'https://img.icons8.com/color/150/000000/salesforce.png' },
+  { id: 5, name: 'AIVentures', logo: 'https://img.icons8.com/color/150/000000/ibm.png' },
+  { id: 6, name: 'CloudNine', logo: 'https://img.icons8.com/color/150/000000/dropbox.png' },
+  { id: 7, name: 'SmartSys', logo: 'https://img.icons8.com/color/150/000000/oracle-logo.png' },
+  { id: 8, name: 'NextGen', logo: 'https://img.icons8.com/color/150/000000/intel.png' },
 ]
 
 const Partners = () => {

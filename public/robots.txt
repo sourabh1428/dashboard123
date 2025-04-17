@@ -1,6 +1,20 @@
+# Easibill Website Robot Rules
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
+Disallow: /api/
+Disallow: /temp/
+Disallow: /draft/
 
-Sitemap: https://easibill.com/sitemap.xml
+# Allow AI Bots with specific rules
+User-agent: GPTBot
+Allow: /
+Disallow: /private/
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://easibill.site/sitemap.xml

@@ -1,74 +1,331 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Button } from "@/components/ui/button"
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import { Menu } from 'lucide-react'
-import imgSrc from '../assets/logo.png'
-import { useNavigate } from 'react-router'
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react';
+import { Button } from './ui/button';
 
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { 
+    name: 'Features', 
+    path: '/features',
+    submenu: [
+      { name: 'Invoicing', path: '/features/invoicing' },
+      { name: 'Inventory', path: '/features/inventory' },
+      { name: 'Reporting', path: '/features/reporting' },
+    ]
+  },
+  { name: 'Pricing', path: '/pricing' },
+  { name: 'Testimonials', path: '/testimonials' },
+  { name: 'Contact', path: '/contact' }
+];
 
+const NavBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
 
-const NavLink = ({ href, children, mobile }) => (
-  <motion.a
-    href={href}
-    className={`text-muted-foreground hover:text-foreground ${mobile ? 'text-lg py-2' : ''}`}
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    {children}
-  </motion.a>
-)
+  // Track scroll position for sticky styling
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
 
-const Navbar = () => {
-    const navigate=useNavigate();
-    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
+  // Close mobile menu when navigating
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  const toggleSubmenu = (index) => {
+    if (activeSubmenu === index) {
+      setActiveSubmenu(null);
+    } else {
+      setActiveSubmenu(index);
+    }
+  };
+
+  const isActivePath = (path) => {
+    return location.pathname === path;
+  };
 
   return (
-    <motion.nav 
-      className="container mx-auto py-4 px-6 flex justify-between items-center"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-black/80 backdrop-blur-md shadow-md shadow-purple-500/5' 
+          : 'bg-transparent'
+      }`}
+      data-section="navigation"
     >
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 md:h-20">
+          {/* Logo */}
       <motion.div 
-        className="flex items-center gap-2"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <div className="w-8 h-8 bg-primary rounded-lg" />
-        <span className="text-xl font-bold">
-      
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex-shrink-0"
+          >
+            <a 
+              href="/" 
+              className="flex items-center gap-2 outline-none focus:ring-2 focus:ring-purple-500 rounded-md"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/');
+              }}
+            >
+              <img 
+                src="https://img.icons8.com/fluency/50/bill.png" 
+                alt="Easibill Logo" 
+                className="h-8 w-auto" 
+                width={32} 
+                height={32} 
+              />
+              <span className="text-white font-bold text-xl">Easibill</span>
+            </a>
+          </motion.div>
 
-        </span>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-2 h-full">
+            {navLinks.map((link, index) => (
+              <div key={index} className="relative group h-full flex items-center">
+                {link.submenu ? (
+                  <div className="h-full">
+                    <button 
+                      className={`flex items-center px-3 py-2 text-sm font-medium h-full
+                        ${isActivePath(link.path) 
+                          ? 'text-purple-400' 
+                          : 'text-gray-300 hover:text-white'
+                        }
+                        transition-colors relative group`}
+                      onClick={() => toggleSubmenu(index)}
+                      aria-expanded={activeSubmenu === index}
+                      aria-controls={`submenu-${index}`}
+                    >
+                      {link.name}
+                      <ChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
+                      
+                      {/* Active indicator */}
+                      <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-purple-500 transform scale-x-0 transition-transform group-hover:scale-x-100 ${
+                        isActivePath(link.path) ? 'scale-x-100' : ''
+                      }`}></span>
+                    </button>
+                    
+                    {/* Dropdown Menu */}
+                    <AnimatePresence>
+                      {activeSubmenu === index && (
+                        <motion.div
+                          id={`submenu-${index}`}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 mt-0 w-48 bg-gray-900/95 backdrop-blur-md rounded-md shadow-lg shadow-purple-500/20 overflow-hidden z-50"
+                        >
+                          <div className="py-2">
+                            {link.submenu.map((sublink, subIndex) => (
+                              <a
+                                key={subIndex}
+                                href={sublink.path}
+                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-purple-900/50 hover:text-white transition-colors"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  navigate(sublink.path);
+                                  setActiveSubmenu(null);
+                                }}
+                              >
+                                {sublink.name}
+                              </a>
+                            ))}
+                          </div>
       </motion.div>
-      <div className="hidden md:flex items-center gap-8">
-        <NavLink href="/lead" onClick={()=>{navigator('/lead')}}>Signup</NavLink>
-       
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <a
+                    href={link.path}
+                    className={`flex items-center px-3 py-2 text-sm font-medium h-full
+                      ${isActivePath(link.path) 
+                        ? 'text-purple-400' 
+                        : 'text-gray-300 hover:text-white'
+                      }
+                      transition-colors relative`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate(link.path);
+                    }}
+                  >
+                    {link.name}
+                    
+                    {/* Active indicator */}
+                    <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-purple-500 transform scale-x-0 transition-transform hover:scale-x-100 ${
+                      isActivePath(link.path) ? 'scale-x-100' : ''
+                    }`}></span>
+                  </a>
+                )}
       </div>
-    
-      <div className="md:hidden">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Menu />
-            </Button>
-          </SheetTrigger>
-          <SheetContent>
-            <div className="flex flex-col gap-4 mt-8">
-              
-              <Button className="w-full mt-4" onClick={()=>navigate('/lead')}>Sign Up</Button>
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </motion.nav>
-  )
-}
+            ))}
+          </nav>
 
-export default Navbar
+          {/* Desktop CTA Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button
+              onClick={() => navigate('/login')}
+              variant="outline"
+              className="px-4 py-2 border-purple-500/30 text-purple-300 hover:bg-purple-900/20 hover:text-white rounded-md"
+              data-conversion-button="login"
+            >
+              Log In
+            </Button>
+            <Button
+              onClick={() => navigate('/lead')}
+              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-md shadow-md"
+              data-conversion-button="get-started"
+            >
+              Get Started
+            </Button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-purple-500"
+            >
+              <span className="sr-only">{isOpen ? 'Close main menu' : 'Open main menu'}</span>
+              {isOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+            </div>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-gray-900/95 backdrop-blur-md overflow-hidden"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {navLinks.map((link, index) => (
+                <div key={index} className="w-full">
+                  {link.submenu ? (
+                    <>
+                      <button
+                        onClick={() => toggleSubmenu(index)}
+                        className={`w-full flex justify-between items-center rounded-md px-3 py-2 text-base font-medium 
+                          ${isActivePath(link.path) 
+                            ? 'bg-purple-900/50 text-white' 
+                            : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                          }`}
+                        aria-expanded={activeSubmenu === index}
+                        aria-controls={`mobile-submenu-${index}`}
+                      >
+                        <span>{link.name}</span>
+                        <ChevronDown className={`h-4 w-4 transition-transform ${activeSubmenu === index ? 'rotate-180' : ''}`} />
+                      </button>
+                      
+                      <AnimatePresence>
+                        {activeSubmenu === index && (
+                          <motion.div
+                            id={`mobile-submenu-${index}`}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="ml-4 mt-2 space-y-1"
+                          >
+                            {link.submenu.map((sublink, subIndex) => (
+                              <a
+                                key={subIndex}
+                                href={sublink.path}
+                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-800/50 hover:text-white"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  navigate(sublink.path);
+                                  setIsOpen(false);
+                                }}
+                              >
+                                {sublink.name}
+                              </a>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    <a
+                      href={link.path}
+                      className={`block rounded-md px-3 py-2 text-base font-medium 
+                        ${isActivePath(link.path) 
+                          ? 'bg-purple-900/50 text-white' 
+                          : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                        }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate(link.path);
+                        setIsOpen(false);
+                      }}
+                    >
+                      {link.name}
+                    </a>
+                  )}
+                </div>
+              ))}
+              <div className="px-3 py-3 space-y-3 border-t border-gray-800">
+                <Button
+                  onClick={() => {
+                    navigate('/login');
+                    setIsOpen(false);
+                  }}
+                  variant="outline"
+                  className="w-full justify-center border-purple-500/30 text-purple-300"
+                  data-conversion-button="login-mobile"
+                >
+                  Log In
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate('/lead');
+                    setIsOpen(false);
+                  }}
+                  className="w-full justify-center bg-gradient-to-r from-purple-600 to-indigo-600"
+                  data-conversion-button="get-started-mobile"
+                >
+                  Get Started
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+};
+
+export default NavBar;
 

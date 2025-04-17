@@ -25,16 +25,16 @@ const fullCaseStudiesData = [
     challenge: "Manual invoicing was time-consuming and error-prone, leading to delayed payments.",
     solution: "Easibill automated the invoicing process, reducing human error and speeding up the billing cycle.",
     results: "Processing time was reduced by 50% and errors decreased by 40%.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 2,
     title: "Enhancing Cash Flow Management",
     overview: "Company B needed a robust solution to manage cash flow as late payments were affecting their operations.",
     challenge: "Delayed invoicing and follow-ups were causing cash flow bottlenecks.",
-    solution: "Easibill’s real-time tracking and automated payment reminders improved their payment collection.",
+    solution: "Easibill's real-time tracking and automated payment reminders improved their payment collection.",
     results: "Cash flow improved by 35% and overdue invoices dropped significantly.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const fullCaseStudiesData = [
     challenge: "High administrative costs and resource drain due to manual processes.",
     solution: "The automation features in Easibill cut down manual data entry and paperwork.",
     results: "Saved over 20 hours per month, allowing staff to focus on strategic tasks.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 4,
@@ -52,16 +52,16 @@ const fullCaseStudiesData = [
     challenge: "Confusing invoices and late statements led to customer frustration.",
     solution: "Easibill enabled clear, prompt billing with customizable templates.",
     results: "Customer satisfaction scores improved by 25%.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 5,
     title: "Improving Financial Reporting",
     overview: "Company E required more accurate financial insights for better decision-making.",
     challenge: "Inconsistent data and manual errors complicated financial reporting.",
-    solution: "Easibill’s integrated analytics and reporting tools automated data collection.",
+    solution: "Easibill's integrated analytics and reporting tools automated data collection.",
     results: "Reporting accuracy improved significantly, aiding strategic decisions.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 6,
@@ -70,16 +70,16 @@ const fullCaseStudiesData = [
     challenge: "Inefficient tracking of due invoices led to prolonged payment cycles.",
     solution: "With automated reminders and payment tracking, Easibill ensured timely collections.",
     results: "Payment delays were reduced, streamlining the overall payment process.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 7,
     title: "Scaling Billing Operations",
     overview: "Company G was expanding rapidly and needed a scalable billing solution.",
-    challenge: "Manual billing processes couldn’t keep up with the pace of growth.",
+    challenge: "Manual billing processes couldn't keep up with the pace of growth.",
     solution: "Easibill provided a scalable, automated platform that grew with the business.",
     results: "Enabled seamless growth with reduced administrative overhead.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 8,
@@ -88,16 +88,16 @@ const fullCaseStudiesData = [
     challenge: "Billing operations consumed excessive staff time.",
     solution: "Easibill automated routine tasks, freeing up staff for more value-added work.",
     results: "Reallocated approximately 15% of staff time to strategic initiatives.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1508002366005-75a695ee2d17?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 9,
     title: "Increasing Data Accuracy",
     overview: "Company I encountered financial discrepancies due to errors in manual invoicing.",
     challenge: "Frequent data inaccuracies resulted in financial misreporting.",
-    solution: "Easibill’s automated data entry reduced human errors dramatically.",
+    solution: "Easibill's automated data entry reduced human errors dramatically.",
     results: "Achieved a significant improvement in data accuracy and financial reliability.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=150&auto=format&fit=crop"
   },
   {
     id: 10,
@@ -106,7 +106,7 @@ const fullCaseStudiesData = [
     challenge: "Manual billing processes were a bottleneck to scaling operations.",
     solution: "By automating billing and gaining financial insights, Easibill supported their growth strategy.",
     results: "Reported a 30% increase in revenue and enhanced operational efficiency.",
-    image: "https://via.placeholder.com/150"
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop"
   }
 ]
 
@@ -260,7 +260,7 @@ const CaseStudies = () => {
     return (
       <div className="min-h-screen bg-white text-black">
         <div className="container mx-auto px-4 py-12 space-y-16">
-          <header className="text-center space-y-6">
+          <header className="text-center space-y-6 dark:bg-gray-800 ">
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}

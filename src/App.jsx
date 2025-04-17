@@ -19,6 +19,11 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import SandBox from "./SandBox/SandBox";
 import { SeoFooter } from "./components/SEO/DynamicSEO";
 
+// Pages
+import FeaturesPage from "./Pages/Features";
+import PricingPage from "./Pages/Pricing";
+import TestimonialsPage from "./Pages/Testimonials";
+import ContactPage from "./Pages/Contact";
 
 const Parallax = ({ children, speed = 10 }) => {
   const ref = useRef(null);
@@ -133,12 +138,8 @@ const App = () => {
 
   const MemoizedDashboard = useMemo(() => <DashboardSection />, []);
 
+  const PageLayout = ({ children }) => {
   return (
-    <div className="overflow-x-hidden">
-      <Routes>
-        <Route
-          path="/"
-          element={
             <div className="relative min-h-screen bg-black">
               <motion.div
                 ref={containerRef}
@@ -168,6 +169,27 @@ const App = () => {
                   </motion.div>
 
                   <main className="relative">
+              {children}
+            </main>
+
+            <motion.footer
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <Footer />
+            </motion.footer>
+          </div>
+        </motion.div>
+
+        <ScrollToTopButton />
+      </div>
+    );
+  };
+
+  const HomePage = () => (
+    <PageLayout>
                     <AnimatePresence mode="wait">
                       <motion.div
                         initial={{ opacity: 0, y: 50 }}
@@ -212,28 +234,14 @@ const App = () => {
                         <Pricing />
                       </motion.div>
                     </div>
-                  </main>
+    </PageLayout>
+  );
 
-                  <motion.footer
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <Footer />
-                  </motion.footer>
-                  <SeoFooter />
-                </div>
-              </motion.div>
-
-              <ScrollToTopButton />
-            </div>
-          }
-        />
-
-        <Route
-          path="/lead"
-          element={
+  return (
+    <div className="overflow-x-hidden">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/lead" element={
             <motion.div
               className="relative min-h-screen bg-black overflow-x-hidden"
               initial={{ opacity: 0 }}
@@ -249,13 +257,95 @@ const App = () => {
                 </div>
               </Suspense>
             </motion.div>
-          }
-        />
-        <Route path="/sandbox" element={<SandBox/>}/>
+        } />
+        
+        {/* New Page Routes */}
+        <Route path="/features" element={<PageLayout><FeaturesPage /></PageLayout>} />
+        <Route path="/pricing" element={<PageLayout><PricingPage /></PageLayout>} />
+        <Route path="/testimonials" element={<PageLayout><TestimonialsPage /></PageLayout>} />
+        <Route path="/contact" element={<PageLayout><ContactPage /></PageLayout>} />
+        
+        {/* Feature Sub-pages */}
+        <Route path="/features/invoicing" element={<PageLayout><FeaturesPage /></PageLayout>} />
+        <Route path="/features/inventory" element={<PageLayout><FeaturesPage /></PageLayout>} />
+        <Route path="/features/reporting" element={<PageLayout><FeaturesPage /></PageLayout>} />
+        
+        {/* Missing pages */}
+        <Route path="/login" element={<PageLayout><div className="container max-w-md mx-auto px-4 py-24 min-h-[70vh]">
+          <h1 className="text-2xl font-bold text-white mb-8">Login</h1>
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <input type="email" className="w-full bg-gray-900/70 border border-gray-700 rounded-md py-2 px-3 text-white" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                <input type="password" className="w-full bg-gray-900/70 border border-gray-700 rounded-md py-2 px-3 text-white" />
+              </div>
+              <div className="flex justify-between items-center">
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  <span className="text-sm text-gray-300">Remember me</span>
+                </label>
+                <a href="#" className="text-sm text-purple-400 hover:text-purple-300">Forgot password?</a>
+              </div>
+              <button className="w-full py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-md hover:from-purple-700 hover:to-indigo-700">Sign In</button>
+            </form>
+          </div>
+        </div></PageLayout>} />
+        
+        <Route path="/demo" element={<PageLayout><div className="container max-w-3xl mx-auto px-4 py-24 min-h-[70vh]">
+          <h1 className="text-3xl font-bold text-white mb-8 text-center">Request a Demo</h1>
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+            <form className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">First Name</label>
+                  <input type="text" className="w-full bg-gray-900/70 border border-gray-700 rounded-md py-2 px-3 text-white" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Last Name</label>
+                  <input type="text" className="w-full bg-gray-900/70 border border-gray-700 rounded-md py-2 px-3 text-white" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <input type="email" className="w-full bg-gray-900/70 border border-gray-700 rounded-md py-2 px-3 text-white" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Company</label>
+                <input type="text" className="w-full bg-gray-900/70 border border-gray-700 rounded-md py-2 px-3 text-white" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                <textarea rows="4" className="w-full bg-gray-900/70 border border-gray-700 rounded-md py-2 px-3 text-white"></textarea>
+              </div>
+              <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-md hover:from-purple-700 hover:to-indigo-700">Schedule Demo</button>
+            </form>
+          </div>
+        </div></PageLayout>} />
+        
+        <Route path="/industries" element={<PageLayout><div className="container mx-auto px-4 py-24 min-h-[70vh]">
+          <h1 className="text-3xl font-bold text-white mb-12 text-center">Industries We Serve</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {['Retail Stores', 'Wholesale Business', 'Restaurants', 'Service Providers', 'Local Shop Billing'].map((industry, index) => (
+              <div key={index} className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/15 transition-colors">
+                <h3 className="text-xl font-semibold text-white mb-4">{industry}</h3>
+                <p className="text-gray-300 mb-4">Custom solutions designed specifically for {industry.toLowerCase()} to streamline operations and boost revenue.</p>
+                <a href="#" className="text-purple-400 hover:text-purple-300 flex items-center">
+                  Learn more
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div></PageLayout>} />
       </Routes>
     </div>
   );
 };
 
-
-export default React.memo(App);
+export default App;
