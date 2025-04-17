@@ -40,7 +40,6 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           animations: ['framer-motion'],
-          ui: ['@/components/ui'],
           charts: ['recharts'],
           // Split components to reduce main bundle size
           layout: ['./src/components/NavBar.jsx', './src/components/Footer.jsx'],
