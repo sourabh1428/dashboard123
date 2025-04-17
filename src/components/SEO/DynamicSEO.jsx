@@ -261,7 +261,7 @@ export const SeoFooter = () => {
                 </a>
               </li>
               <li>
-                <a onClick={() => navigate('/demo')} className={linkClasses}>
+                <a onClick={() => navigate('/lead')} className={linkClasses}>
                   Request Demo
                 </a>
               </li>
@@ -286,3 +286,4 @@ export const SeoFooter = () => {
     </footer>
   );
 };
+

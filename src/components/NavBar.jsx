@@ -17,7 +17,7 @@ const navLinks = [
   },
   { name: 'Pricing', path: '/pricing' },
   { name: 'Testimonials', path: '/testimonials' },
-  { name: 'Contact', path: '/contact' }
+  { name: 'Contact', path: '/lead' }
 ];
 
 const NavBar = () => {
@@ -92,7 +92,8 @@ const NavBar = () => {
                 alt="Easibill Logo" 
                 className="h-8 w-auto" 
                 width={32} 
-                height={32} 
+                height={32}
+                fetchpriority="high"
               />
               <span className="text-white font-bold text-xl">Easibill</span>
             </a>
@@ -182,18 +183,26 @@ const NavBar = () => {
           </nav>
 
           {/* Desktop CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             <Button
               onClick={() => navigate('/login')}
               variant="outline"
-              className="px-4 py-2 border-purple-500/30 text-purple-300 hover:bg-purple-900/20 hover:text-white rounded-md"
+              className="px-3 py-1.5 border-purple-500/30 text-purple-300 hover:bg-purple-900/20 hover:text-white rounded-md text-sm"
               data-conversion-button="login"
             >
               Log In
             </Button>
             <Button
               onClick={() => navigate('/lead')}
-              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-md shadow-md"
+              variant="outline"
+              className="px-3 py-1.5 border-indigo-500/30 text-indigo-300 hover:bg-indigo-900/20 hover:text-white rounded-md text-sm"
+              data-conversion-button="demo"
+            >
+              Request Demo
+            </Button>
+            <Button
+              onClick={() => navigate('/lead')}
+              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-md shadow-md text-sm"
               data-conversion-button="get-started"
             >
               Get Started
@@ -296,28 +305,34 @@ const NavBar = () => {
                   )}
                 </div>
               ))}
-              <div className="px-3 py-3 space-y-3 border-t border-gray-800">
-                <Button
+              <div className="px-5 py-4 border-t border-gray-800 space-y-3">
+                <button
                   onClick={() => {
                     navigate('/login');
                     setIsOpen(false);
                   }}
-                  variant="outline"
-                  className="w-full justify-center border-purple-500/30 text-purple-300"
-                  data-conversion-button="login-mobile"
+                  className="w-full text-center block px-4 py-2 rounded-md border border-purple-500/30 text-purple-300 hover:bg-purple-900/20 hover:text-white"
                 >
                   Log In
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={() => {
                     navigate('/lead');
                     setIsOpen(false);
                   }}
-                  className="w-full justify-center bg-gradient-to-r from-purple-600 to-indigo-600"
-                  data-conversion-button="get-started-mobile"
+                  className="w-full text-center block px-4 py-2 rounded-md border border-indigo-500/30 text-indigo-300 hover:bg-indigo-900/20 hover:text-white"
+                >
+                  Request Demo
+                </button>
+                <button
+                  onClick={() => {
+                    navigate('/lead');
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-center block px-4 py-2 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white"
                 >
                   Get Started
-                </Button>
+                </button>
               </div>
             </div>
           </motion.div>

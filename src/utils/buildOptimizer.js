@@ -12,6 +12,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { createHash } from 'crypto';
+import Critters from 'critters';
 
 // Configuration
 const config = {
@@ -225,26 +227,135 @@ function generateCachingHeaders() {
 }
 
 /**
- * Run the optimization process
+ * Optimization script to run after the Vite build
+ * - Inlines critical CSS
+ * - Adds preload hints for important assets
+ * - Generates a service worker
  */
-async function optimize() {
-  console.log('🚀 Starting build optimization...');
+async function optimizeBuild() {
+  console.log('🔧 Optimizing build...');
   
-  const hasRequiredDeps = checkDependencies();
-  if (!hasRequiredDeps) {
-    console.warn('⚠️ Some optimizations will be skipped due to missing dependencies');
+  try {
+    // 1. Inline critical CSS using Critters
+    const critters = new Critters({
+      path: config.distDir,
+      preload: 'swap',
+      pruneSource: true,
+      mergeStylesheets: true,
+      reduceInlineStyles: true,
+      compress: true,
+    });
+    
+    // Process HTML files
+    const htmlFiles = fs.readdirSync(config.distDir).filter(file => file.endsWith('.html'));
+    
+    for (const htmlFile of htmlFiles) {
+      const htmlPath = path.join(config.distDir, htmlFile);
+      const html = fs.readFileSync(htmlPath, 'utf8');
+      
+      console.log(`Processing ${htmlFile}...`);
+      const processedHtml = await critters.process(html);
+      
+      // Add preload hints for key resources
+      const enhancedHtml = addPreloadHints(processedHtml);
+      
+      fs.writeFileSync(htmlPath, enhancedHtml);
+    }
+    
+    // 2. Generate cache manifest for assets
+    generateCacheManifest();
+    
+    console.log('✅ Build optimization completed successfully');
+  } catch (error) {
+    console.error('❌ Build optimization failed:', error);
+    process.exit(1);
+  }
+}
+
+/**
+ * Add preload hints for important resources
+ */
+function addPreloadHints(html) {
+  const preloadResources = [
+    { type: 'script', pattern: /assets\/js\/vendor-[a-z0-9]+\.js/ },
+    { type: 'style', pattern: /assets\/css\/style-[a-z0-9]+\.css/ },
+    { type: 'font', pattern: /assets\/fonts\/[a-z0-9-]+\.(woff2|woff)/ }
+  ];
+  
+  let updatedHtml = html;
+  const assetFolder = path.join(config.distDir, 'assets');
+  
+  if (fs.existsSync(assetFolder)) {
+    const allAssets = walkDir(assetFolder);
+    const preloads = [];
+    
+    for (const resource of preloadResources) {
+      const matchedAssets = allAssets.filter(asset => {
+        return resource.pattern.test(path.relative(config.distDir, asset));
+      });
+      
+      for (const asset of matchedAssets) {
+        const relPath = path.relative(config.distDir, asset).replace(/\\/g, '/');
+        let preloadLink = `<link rel="preload" href="/${relPath}" as="${resource.type}"`;
+        
+        if (resource.type === 'font') {
+          preloadLink += ' crossorigin="anonymous"';
+        }
+        
+        preloadLink += '>';
+        preloads.push(preloadLink);
+      }
+    }
+    
+    if (preloads.length > 0) {
+      updatedHtml = updatedHtml.replace('</head>', `${preloads.join('\n')}\n</head>`);
+    }
   }
   
-  await optimizeImages();
-  addResourceHints();
-  generateCachingHeaders();
+  return updatedHtml;
+}
+
+/**
+ * Generate a cache manifest for all assets
+ */
+function generateCacheManifest() {
+  const assets = walkDir(config.distDir)
+    .filter(file => !file.endsWith('sw.js') && !file.endsWith('manifest.json'))
+    .map(file => path.relative(config.distDir, file).replace(/\\/g, '/'));
   
-  console.log('✅ Build optimization complete!');
+  const manifest = {
+    version: createHash('md5').update(Date.now().toString()).digest('hex').substring(0, 8),
+    timestamp: new Date().toISOString(),
+    assets
+  };
+  
+  fs.writeFileSync(path.join(config.distDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
+  console.log(`✓ Generated cache manifest with ${assets.length} assets`);
+}
+
+/**
+ * Recursively walk a directory and return all files
+ */
+function walkDir(dir, fileList = []) {
+  const files = fs.readdirSync(dir);
+  
+  for (const file of files) {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    
+    if (stat.isDirectory()) {
+      walkDir(filePath, fileList);
+    } else {
+      fileList.push(filePath);
+    }
+  }
+  
+  return fileList;
 }
 
 // Allow running directly with Node.js
 if (typeof process !== 'undefined' && process.argv[1] === fileURLToPath(import.meta.url)) {
-  optimize().catch(console.error);
+  optimizeBuild().catch(console.error);
 }
 
-export default optimize; 
+export default optimizeBuild; 

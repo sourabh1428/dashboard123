@@ -241,40 +241,7 @@ const Footer = () => {
           </p>
           
           {/* Trust Badges */}
-          <div className="mt-6 flex flex-wrap justify-center items-center gap-6">
-            <img 
-              src="https://img.icons8.com/fluency/80x40/paypal.png" 
-              alt="Secure Payments" 
-              className="h-10" 
-              loading="lazy" 
-              width={80}
-              height={40}
-            />
-            <img 
-              src="https://img.icons8.com/color/80x40/000000/tax.png" 
-              alt="GST Compliant" 
-              className="h-10" 
-              loading="lazy" 
-              width={80}
-              height={40}
-            />
-            <img 
-              src="https://img.icons8.com/fluency/80x40/cloud-sync.png" 
-              alt="Cloud Backup" 
-              className="h-10" 
-              loading="lazy" 
-              width={80}
-              height={40}
-            />
-            <img 
-              src="https://img.icons8.com/fluency/80x40/24-7.png" 
-              alt="24/7 Support" 
-              className="h-10" 
-              loading="lazy" 
-              width={80}
-              height={40}
-            />
-          </div>
+          
         </div>
       </div>
     </footer>

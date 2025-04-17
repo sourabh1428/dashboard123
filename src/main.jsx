@@ -1,84 +1,68 @@
 import { StrictMode, useEffect, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
-import { Analytics } from "@vercel/analytics/react"
-//ss
-import { SpeedInsights } from "@vercel/speed-insights/react"
 import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { DynamicSEO } from './components/SEO/DynamicSEO'
-import { initializePerformanceOptimizations } from './utils/performanceOptimization'
-import { preloadCriticalImages } from './utils/imageOptimization'
 import { FullPageLoader } from './components/LoadingSpinner'
+
+// Use React.lazy for code splitting - only load components when needed
+const App = lazy(() => import('./App.jsx'))
 
 // Critical images that should be preloaded
 const CRITICAL_IMAGES = [
-  '/logo.svg',
-  '/dashboard-preview.webp',
+  { url: 'https://img.icons8.com/fluency/50/bill.png', type: 'image' }
 ]
 
-// Domains to add connection hints for
-const CONNECTION_HINTS = [
-  'https://fonts.googleapis.com',
-  'https://fonts.gstatic.com',
-  'https://www.googletagmanager.com',
-]
-
-// Analytics scripts to load on interaction
-const ANALYTICS_SCRIPTS = {
-  googleAnalytics: 'https://www.googletagmanager.com/gtag/js?id=G-H54PC2W756',
-  metaPixel: 'https://connect.facebook.net/en_US/fbevents.js',
-  hotjar: 'https://static.hotjar.com/c/hotjar-XXXXXXX.js',
+// Performance optimization - preload critical images
+const preloadCriticalImages = (images) => {
+  if (typeof window === 'undefined') return;
+  images.forEach(item => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = item.type;
+    link.href = item.url;
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+  });
 }
-
-// Performance optimization initialization
-if (typeof window !== 'undefined') {
-  // Initialize performance optimizations
-  initializePerformanceOptimizations({
-    analyticsScripts: ANALYTICS_SCRIPTS,
-    connectionHints: CONNECTION_HINTS,
-    deferredScripts: [
-      // Add any other third-party scripts here
-      { src: 'https://cdn.example.com/some-plugin.js', options: { id: 'plugin-script' } },
-    ]
-  })
-  
-  // Preload critical images
-  preloadCriticalImages(CRITICAL_IMAGES)
-}
-
-// Lazy load App2 component
-const App2Lazy = lazy(() => import('./App2,'))
 
 // Root component with error boundary
 const Root = () => {
   useEffect(() => {
-    // Remove any splash screen or initial loading indicator
-    const splashScreen = document.getElementById('splash-screen')
-    if (splashScreen) {
-      splashScreen.classList.add('fade-out')
-      setTimeout(() => {
-        splashScreen.remove()
-      }, 500)
+    // Preload critical images
+    preloadCriticalImages(CRITICAL_IMAGES);
+    
+    // Remove loading indicator
+    const loadingElement = document.querySelector('.loading');
+    if (loadingElement) {
+      loadingElement.style.display = 'none';
     }
-  }, [])
+  }, []);
 
   return (
     <StrictMode>
       <BrowserRouter>
         <HelmetProvider>
           <DynamicSEO />
-          <Suspense fallback={<FullPageLoader message="Loading application..." />}>
-            <App2Lazy />
+          <Suspense fallback={<FullPageLoader />}>
+            <App />
           </Suspense>
-          <Analytics />
-          <SpeedInsights />
         </HelmetProvider>
       </BrowserRouter>
     </StrictMode>
   )
 }
 
-// Mount the application
-createRoot(document.getElementById('root')).render(<Root />)
+// Mount the application - use custom function to ensure efficient hydration
+const renderApp = () => {
+  const rootElement = document.getElementById('root');
+  createRoot(rootElement).render(<Root />);
+}
+
+// Optimize initial render timing
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderApp);
+} else {
+  renderApp();
+}

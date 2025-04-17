@@ -17,6 +17,9 @@ const TestimonialCard = ({ name, role, company, image, quote, rating = 5, delay 
           src={image} 
           alt={name} 
           className="w-16 h-16 rounded-full object-cover border-2 border-purple-500"
+          width="64"
+          height="64"
+          loading="lazy"
         />
       </div>
       <div>
@@ -61,14 +64,12 @@ const TestimonialsPage = () => {
     },
     {
       id: 3,
-      name: 'Priya Patel',
-      role: 'CFO, GlobalMart',
-      name: "Rajesh Sharma",
-      role: "Owner",
+      name: 'Rajesh Sharma',
+      role: 'Owner',
       company: "Sharma Electronics",
+      text: "Easibill has transformed how we manage our inventory and billing. The software is intuitive and has helped us reduce billing errors by 90%.",
+      rating: 5,
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
-      quote: "Easibill has transformed how we manage our inventory and billing. The software is intuitive and has helped us reduce billing errors by 90%.",
-      rating: 5
     },
     {
       name: "Priya Patel",
@@ -208,6 +209,9 @@ const TestimonialsPage = () => {
                   src={video.thumbnail} 
                   alt={`${video.name} testimonial`} 
                   className="w-full h-auto"
+                  width="600"
+                  height="400"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="bg-purple-600 rounded-full p-4 cursor-pointer hover:bg-purple-700 transition-colors">
@@ -294,6 +298,9 @@ const TestimonialsPage = () => {
                 src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=600&h=600&auto=format&fit=crop"
                 alt="Royal Supermarket" 
                 className="w-full h-full object-cover"
+                width="600"
+                height="600"
+                loading="lazy"
               />
             </div>
           </div>
@@ -321,7 +328,7 @@ const TestimonialsPage = () => {
               Start Free Trial <ArrowRight size={18} />
             </button>
             <button
-              onClick={() => navigate('/demo')}
+              onClick={() => navigate('/lead')}
               className="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg"
             >
               Request Demo

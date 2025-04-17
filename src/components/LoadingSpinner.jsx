@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 /**
  * LoadingSpinner Component
@@ -39,17 +38,9 @@ const LoadingSpinner = ({
       aria-live="polite"
       data-testid="loading-spinner"
     >
-      <motion.div
-        className={`${spinnerSize} border-4 border-solid ${spinnerColor} rounded-full`}
-        animate={{ rotate: 360 }}
-        transition={{
-          duration: 1,
-          ease: "linear",
-          repeat: Infinity,
-          repeatType: "loop"
-        }}
-        // Use will-change for better performance
-        style={{ willChange: 'transform' }}
+      <div
+        className={`${spinnerSize} border-4 border-solid ${spinnerColor} rounded-full animate-spin`}
+        style={{ animationDuration: '1s' }}
       />
       {label && <span className="sr-only">{label}</span>}
     </div>

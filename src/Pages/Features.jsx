@@ -68,37 +68,37 @@ const FeaturesPage = () => {
           <FeatureCard
             title="Invoicing"
             description="Create professional invoices in seconds with customizable templates and automatic calculations."
-            icon={<img src="https://img.icons8.com/fluency/50/invoice.png" alt="Invoicing icon" className="h-12 w-12" />}
+            icon={<img src="https://img.icons8.com/fluency/50/invoice.png" alt="Invoicing icon" className="h-12 w-12" width="50" height="50" />}
             delay={0.1}
           />
           <FeatureCard
             title="Inventory Management"
             description="Track stock levels, set alerts for low inventory, and manage product variations easily."
-            icon={<img src="https://img.icons8.com/fluency/50/warehouse.png" alt="Inventory icon" className="h-12 w-12" />}
+            icon={<img src="https://img.icons8.com/fluency/50/warehouse.png" alt="Inventory icon" className="h-12 w-12" width="50" height="50" />}
             delay={0.2}
           />
           <FeatureCard
             title="Financial Reports"
             description="Get insights into your business with detailed reports on sales, expenses, and profits."
-            icon={<img src="https://img.icons8.com/fluency/50/combo-chart.png" alt="Reports icon" className="h-12 w-12" />}
+            icon={<img src="https://img.icons8.com/fluency/50/combo-chart.png" alt="Reports icon" className="h-12 w-12" width="50" height="50" />}
             delay={0.3}
           />
           <FeatureCard
             title="Point of Sale"
             description="Fast and efficient checkout process with support for multiple payment methods."
-            icon={<img src="https://img.icons8.com/fluency/50/card-in-use.png" alt="POS icon" className="h-12 w-12" />}
+            icon={<img src="https://img.icons8.com/fluency/50/card-in-use.png" alt="POS icon" className="h-12 w-12" width="50" height="50" />}
             delay={0.4}
           />
           <FeatureCard
             title="GST Compliance"
             description="Stay compliant with automatic GST calculations and filing assistance."
-            icon={<img src="https://img.icons8.com/fluency/50/tax.png" alt="GST icon" className="h-12 w-12" />}
+            icon={<img src="https://img.icons8.com/fluency/50/tax.png" alt="GST icon" className="h-12 w-12" width="50" height="50" />}
             delay={0.5}
           />
           <FeatureCard
             title="Multi-device Access"
             description="Access your billing software from anywhere, on any device with cloud synchronization."
-            icon={<img src="https://img.icons8.com/fluency/50/cloud-sync.png" alt="Cloud icon" className="h-12 w-12" />}
+            icon={<img src="https://img.icons8.com/fluency/50/cloud-sync.png" alt="Cloud icon" className="h-12 w-12" width="50" height="50" />}
             delay={0.6}
           />
         </div>
@@ -145,6 +145,9 @@ const FeaturesPage = () => {
                 src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?q=80&w=600&h=400&auto=format&fit=crop"
                 alt="Invoicing screenshot"
                 className="w-full h-auto"
+                width="600"
+                height="400"
+                loading="lazy"
               />
             </motion.div>
           </div>
@@ -162,6 +165,9 @@ const FeaturesPage = () => {
                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&h=400&auto=format&fit=crop"
                 alt="Inventory screenshot"
                 className="w-full h-auto"
+                width="600"
+                height="400"
+                loading="lazy"
               />
             </motion.div>
             <motion.div
@@ -230,6 +236,9 @@ const FeaturesPage = () => {
                 src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?q=80&w=600&h=400&auto=format&fit=crop"
                 alt="Reporting screenshot"
                 className="w-full h-auto"
+                width="600"
+                height="400"
+                loading="lazy"
               />
             </motion.div>
           </div>

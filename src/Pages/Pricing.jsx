@@ -295,7 +295,7 @@ const PricingPage = () => {
               Start Free Trial
             </button>
             <button
-              onClick={() => navigate('/demo')}
+              onClick={() => navigate('/lead')}
               className="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg"
             >
               Request Demo
