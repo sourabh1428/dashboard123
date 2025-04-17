@@ -12,13 +12,41 @@ export const lazyImport = (importFn, chunkName) => {
   const enhancedImport = async () => {
     try {
       const module = await importFn();
-      return module;
+      // Handle both default exports and named exports
+      // If a module has no default export but we're trying to use it as one,
+      // this will cause the "invalid element type" error
+      if (module.default) {
+        return module;
+      } else if (chunkName && module[chunkName]) {
+        // If there's a named export that matches chunkName, use it as default
+        return { default: module[chunkName] };
+      } else {
+        console.error(`Component "${chunkName || 'unknown'}" not found in module`);
+        // Return a fallback component to prevent crashes
+        return { 
+          default: () => <div className="error-boundary">Failed to load component</div> 
+        };
+      }
     } catch (error) {
       console.error(`Failed to load chunk "${chunkName || 'unknown'}"`, error);
       
       // Retry loading once after a short delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return importFn();
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        const module = await importFn();
+        if (module.default) {
+          return module;
+        } else if (chunkName && module[chunkName]) {
+          return { default: module[chunkName] };
+        }
+      } catch (retryError) {
+        console.error(`Retry failed for "${chunkName || 'unknown'}"`, retryError);
+      }
+      
+      // Return a fallback component
+      return { 
+        default: () => <div className="error-boundary">Failed to load component</div> 
+      };
     }
   };
   
